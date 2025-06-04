@@ -1,0 +1,16 @@
+
+.pageContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentWrapper {
+    flex: 1 0 auto;
+}
+
+.content {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+}
