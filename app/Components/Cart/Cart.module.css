@@ -1,0 +1,42 @@
+.cartOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cart {
+    background: rgb(61, 61, 61);
+    height: 100%;
+    width: 400px;
+    padding: 2rem;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.slideIn {
+    transform: translateX(0%);
+}
+
+.slideOut {
+    transform: translateX(100%);
+}
+
+.closeButton {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 830px) {
+    .cart {
+    width: 100%;
+}
+}
