@@ -10,19 +10,22 @@ const products = [
     id: 1,
     name: "Ducky Mr Pop",
     price: 2.99,
-    image: ducky
+    image: ducky,
+    stock: 1
   },
   {
     id: 2,
     name: "Ducky Dr Max",
     price: 2.99,
-    image: ducky
+    image: ducky,
+    stock: 1
   },
   {
     id: 3,
     name: "Ducky Mrs Pop",
     price: 2.99,
-    image: ducky
+    image: ducky,
+    stock: 1
   }
 ];
 
@@ -32,11 +35,18 @@ export default function HomePage() {
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
 
-    const addToCart = (product) => {
-        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        cart.push(product);
-        localStorage.setItem("cart", JSON.stringify(cart));
+const addToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+    if (existingProductIndex !== -1) {
+        cart[existingProductIndex].stock += 1;
+    } else {
+        cart.push({ ...product, stock: 1 });
     }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+};
 
     return (
         <div className={styles.body}>

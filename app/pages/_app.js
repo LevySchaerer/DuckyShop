@@ -4,7 +4,7 @@ import "../styles/global.css";
 function App({ Component, pageProps }) {
   return (
     <Layout>
-      <Component {...pageprops}/>
+      <Component {...pageProps}/>
     </Layout>
   );
 }
