@@ -1,0 +1,27 @@
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.imgContainer img {
+    width: 400px;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+#oli {
+    width: 100%;
+}
+
+#levy {
+    width: 100%;
+}

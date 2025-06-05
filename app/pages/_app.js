@@ -1,10 +1,10 @@
 import Layout from "@/Components/Layout/Layout";
 import "../styles/global.css";
 
-function App() {
+function App({ Component, pageprops}) {
   return (
     <Layout>
-      <h1>Hallo</h1>
+      <Component {...pageprops}/>
     </Layout>
   );
 }
