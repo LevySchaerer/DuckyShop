@@ -32,23 +32,26 @@ export default function HomePage() {
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
 
+    const addToCart = (product) => {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
     return (
         <div className={styles.body}>
             <div className={styles.container}>
 
                 <IoIosArrowBack size={60} onClick={prev} className={styles.arrow}/>
                 <div className={styles.sliderWrapper}>
-                    <div
-                        className={styles.slider}
-                        style={{ transform: `translateX(-${index * 100}%)` }}
-                    >
+                    <div className={styles.slider} style={{ transform: `translateX(-${index * 100}%)` }}>
                         {products.map((product, i) => (
                             <div key={i} className={`${styles.slide} ${i === index ? styles.active : ''}`}>
                                 <Image src={product.image} alt="ducky" className={styles.ducky} />
                                 <div className={styles.details}>
                                     <h1>{product.price} Fr</h1>
                                     <h2>{product.name}</h2>
-                                    <button onClick={() => console.log(product.id)}>Add to Cart</button>
+                                    <button onClick={() => addToCart(product)}>Add to Cart</button>
                                 </div>
                             </div>
                         ))}
