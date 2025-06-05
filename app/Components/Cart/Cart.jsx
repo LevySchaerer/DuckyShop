@@ -5,9 +5,15 @@ import { IoClose } from "react-icons/io5";
 const Cart = ({ isOpen, onClose }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [animateIn, setAnimateIn] = useState(false);
+    const [sum, setSum] = useState(0)
 
     useEffect(() => {
-        console.log(animateIn)
+        const cartdata = localStorage.getItem('cart');
+        const cart = JSON.parse(cartdata);
+        setSum(cart.reduce((sum, product) => sum + (product.price), 0));
+    }, [isOpen])
+    
+    useEffect(() => {
         if (isOpen) {
             setIsVisible(true);
             setTimeout(() => setAnimateIn(true), 100);
@@ -32,6 +38,7 @@ const Cart = ({ isOpen, onClose }) => {
                 <IoClose size={30} className={styles.closeButton} onClick={onClose} />
                 <h2>Your Shopping Cart</h2>
                 <p>cart is currently empty.</p>
+                <h3>{sum.toFixed(1)}0 Fr</h3>
             </div>
         </div>
     );
