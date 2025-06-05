@@ -1,16 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import { IoClose } from "react-icons/io5";
+import ducky from '../../public/RubberDucky.jpg'
+import Image from 'next/image';
 
 const Cart = ({ isOpen, onClose }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [animateIn, setAnimateIn] = useState(false);
     const [sum, setSum] = useState(0)
+    const [cart, setCart] = useState([])
 
     useEffect(() => {
         const cartdata = localStorage.getItem('cart');
-        const cart = JSON.parse(cartdata);
-        setSum(cart.reduce((sum, product) => sum + (product.price), 0));
+        const cartjson = cartdata ? JSON.parse(cartdata) : [];
+        setCart(cartjson)
+        console.log(cartjson)
+        setSum(cartjson.reduce((sum, product) => sum + (product.price), 0));
     }, [isOpen])
     
     useEffect(() => {
@@ -37,7 +42,24 @@ const Cart = ({ isOpen, onClose }) => {
 
                 <IoClose size={30} className={styles.closeButton} onClick={onClose} />
                 <h2>Your Shopping Cart</h2>
-                <p>cart is currently empty.</p>
+                {cart && cart.length === 0 ? (
+                    <p>cart is currently empty.</p>
+                ) : (
+                    <div className={styles.cartItems}>
+                        {cart.map((product, i) => {
+                            return (
+                                <div key={i} className={styles.cartItem}>
+                                    <Image src={product.image} alt="ducky" className={styles.ducky} />
+                                    <div className={styles.cartItemDetails}>
+                                        <h4>{product.price}</h4>
+                                        <h4>{product.name}</h4>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
+                <p>Total</p>
                 <h3>{sum.toFixed(1)}0 Fr</h3>
             </div>
         </div>
