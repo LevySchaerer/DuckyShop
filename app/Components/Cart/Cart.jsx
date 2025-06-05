@@ -14,7 +14,7 @@ const Cart = ({ isOpen, onClose }) => {
         } else {
             setAnimateIn(false);
 
-            const timeout = setTimeout(function() {
+            const timeout = setTimeout(function () {
                 setIsVisible(false);
             }, 300);
             return () => clearTimeout(timeout);
@@ -28,7 +28,7 @@ const Cart = ({ isOpen, onClose }) => {
             <div
                 className={`${styles.cart} ${animateIn ? styles.slideIn : styles.slideOut}`}
                 onClick={e => e.stopPropagation()}>
-                    
+
                 <IoClose size={30} className={styles.closeButton} onClick={onClose} />
                 <h2>Your Shopping Cart</h2>
                 <p>cart is currently empty.</p>

@@ -1,7 +1,7 @@
 import Layout from "@/Components/Layout/Layout";
 import "../styles/global.css";
 
-function App({ Component, pageprops}) {
+function App({ Component, pageProps }) {
   return (
     <Layout>
       <Component {...pageprops}/>
