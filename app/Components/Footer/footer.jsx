@@ -10,7 +10,7 @@ const Footer = () => {
                 <Link href="/contactus">
                     <p>Contact Us</p>
                 </Link>
-                <Link href="/privacypolicy">
+                <Link href="/agb">
                     <p>Privacy Policy</p>
                 </Link>
                 <Link href="/impressum">
