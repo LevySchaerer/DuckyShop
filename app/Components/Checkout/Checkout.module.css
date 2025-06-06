@@ -1,6 +1,7 @@
 .body {
+    margin-top: 50px;
     width: 100%;
-    height: 800px;
+    height: 600px;
     display: flex;
     justify-content: center;
 }
@@ -32,6 +33,9 @@
     content: url('https://go.twint.ch/static/img/button_light_en.svg');
 }
 
+.CartItems {
+    margin-top: 30px;
+}
 
 .cartItem {
     display: flex;
@@ -91,4 +95,23 @@
 
 .infoIcon {
     color: white;
+}
+
+.title {
+    font-weight: 100;
+    margin-top: -40px;
+}
+
+.sectionTitle {
+    margin-top: 50px;
+}
+
+.CheckoutInputTitel {
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.CheckoutInput {
+    height: 30px;
+    font-size: 18px;
 }
