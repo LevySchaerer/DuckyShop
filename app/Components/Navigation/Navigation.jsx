@@ -18,7 +18,7 @@ const Navigation = () => {
             <div className={styles.links}>
                 <ul>
                     <li><Link href="/aboutus">About Us</Link></li>
-                    <li><Link href="/"><GiShoppingCart onClick={toggleCart} size={30} /></Link></li>
+                    <li><Link href=""><GiShoppingCart onClick={toggleCart} size={30} /></Link></li>
                 </ul>
             </div>
             <Cart isOpen={cartOpen} onClose={toggleCart} />

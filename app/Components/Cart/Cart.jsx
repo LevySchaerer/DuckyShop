@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
+import Link from 'next/link';
 
 const Cart = ({ isOpen, onClose }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -97,7 +98,7 @@ const Cart = ({ isOpen, onClose }) => {
                         <h3>{sum.toFixed(1)}0 Fr</h3>
                     </>
                 )}
-                <button className={styles.checkoutButton}><TbTruckDelivery size={30} className={styles.checkoutIcon}/><span className={styles.chackoutText}>Checkout</span></button>
+                <Link onClick={onClose} href="/checkout" className={styles.checkoutButton}><TbTruckDelivery size={30} className={styles.checkoutIcon}/><span className={styles.chackoutText}>Checkout</span></Link>
             </div>
         </div>
     );

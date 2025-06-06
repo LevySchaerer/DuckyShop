@@ -1,0 +1,117 @@
+.body {
+    margin-top: 50px;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkoutContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background-color: #383838;
+}
+
+.rightSection, .leftSection {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.twintButton {
+    margin-top: auto;
+    border-radius: 6px;
+    display: flex;
+    width: fit-content;
+    cursor: pointer;
+    border: none;
+}
+
+.twintButton:hover .twintImage {
+    content: url('https://go.twint.ch/static/img/button_light_en.svg');
+}
+
+.CartItems {
+    margin-top: 30px;
+}
+
+.cartItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: rgb(49, 49, 49);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.leftCartSection {
+    display: flex;
+}
+
+.ducky {
+    display: flex;
+    align-self: center;
+    height: 60px;
+    width: auto;
+    margin: 0 10px;
+}
+
+.leftDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.name {
+    font-weight: 300;
+}
+
+.price {
+    display: flex;
+    align-self: flex-end;
+    width: fit-content;
+}
+
+.totalPrice {
+    margin-top: 20px;
+}
+
+.totalPrice span {
+    border-bottom: solid 2px white;
+}
+
+.paymentSection {
+    margin-top: auto;
+}
+
+.paymentInfo {
+    font-weight: 300;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.infoIcon {
+    color: white;
+}
+
+.title {
+    font-weight: 100;
+    margin-top: -40px;
+}
+
+.sectionTitle {
+    margin-top: 50px;
+}
+
+.CheckoutInputTitel {
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.CheckoutInput {
+    height: 30px;
+    font-size: 18px;
+}
