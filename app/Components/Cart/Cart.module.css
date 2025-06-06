@@ -68,6 +68,17 @@
     width: auto;
 }
 
+@media (prefers-color-scheme: light) {
+    .cart {
+        background: rgb(230, 241, 243);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cartItem {
+        background-color: rgb(213, 219, 221);
+    }
+}
+
 @media only screen and (max-width: 830px) {
     .cart {
         width: 100%;
