@@ -6,199 +6,119 @@ function AGB() {
             <div className={styles.container}>
                 <h1 className={styles.title}>Allgemeine Geschäftsbedingungen</h1>
                 <p className={styles.date}>Stand: April 2025</p>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>1. Geltungsbereich</h2>
                     <p className={styles.text}>
-                        Die nachfolgenden Allgemeinen Geschäftsbedingungen gelten für
-                        sämtliche Verträge, die zwischen campustype GMBH, nachfolgend „Anbieter“ genannt, und
-                        einem Kunden über die Webseite campustype.com oder
-                        andere Vertriebskanäle abgeschlossen werden.
+                        Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Bestellungen über unseren Online-Shop „DuckyShop“,
+                        betrieben von der campustype GmbH, mit Sitz in der Schweiz (nachfolgend „Anbieter“ genannt).
                     </p>
                     <p className={styles.text}>
-                        Diese AGB gelten ausschliesslich. Abweichende, entgegenstehende oder ergänzende AGB des
-                        Kunden werden nur dann Vertragsbestandteil, wenn der Anbieter ihrer Geltung ausdrücklich
-                        schriftlich zugestimmt hat.
+                        Entgegenstehende oder von diesen AGB abweichende Bedingungen der Kundschaft werden nicht anerkannt, ausser der Anbieter stimmt diesen ausdrücklich zu.
                     </p>
                     <p className={styles.text}>
-                        Der Anbieter behält sich vor, diese AGB jederzeit zu ändern, wobei der Kunde über
-                        Änderungen rechtzeitig informiert wird.
+                        Der Anbieter behält sich vor, die AGB jederzeit zu ändern. Es gilt die zum Zeitpunkt der Bestellung gültige Fassung.
                     </p>
                 </section>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>2. Vertragsschluss</h2>
                     <p className={styles.text}>
-                        Die Darstellung von Produkten oder Dienstleistungen auf der Webseite stellt kein
-                        rechtlich bindendes Angebot, sondern lediglich eine unverbindliche Aufforderung zur
-                        Abgabe eines Angebots durch den Kunden dar.
+                        Die Produktdarstellungen im DuckyShop stellen kein rechtlich bindendes Angebot dar, sondern eine unverbindliche Aufforderung zur Bestellung.
                     </p>
                     <p className={styles.text}>
-                        Durch Absenden einer Bestellung gibt der Kunde ein verbindliches Angebot ab. Der Anbieter
-                        kann dieses Angebot innerhalb von fünf Werktagen durch eine schriftliche oder elektronische
-                        Bestellbestätigung (z. B. per E-Mail) annehmen.
+                        Mit dem Absenden einer Bestellung gibt die Kundschaft ein verbindliches Angebot zum Abschluss eines Kaufvertrags ab.
+                        Der Vertrag kommt zustande, wenn der Anbieter die Bestellung durch eine Auftragsbestätigung per E-Mail annimmt.
                     </p>
                     <p className={styles.text}>
-                        Ein Vertrag kommt erst mit der Annahme des Angebots durch den Anbieter zustande. Der Kunde
-                        erhält eine Bestätigung, die alle wesentlichen Vertragsdetails enthält.
-                    </p>
-                    <p className={styles.text}>
-                        Der Anbieter behält sich vor, Bestellungen ohne Angabe von Gründen abzulehnen, insbesondere
-                        bei Verdacht auf Missbrauch oder unvollständigen Angaben.
+                        Der Anbieter behält sich vor, Bestellungen ohne Angabe von Gründen abzulehnen.
                     </p>
                 </section>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>3. Preise und Zahlungsbedingungen</h2>
                     <p className={styles.text}>
-                        Alle angegebenen Preise sind Endpreise in Euro und enthalten die gesetzliche
-                        Umsatzsteuer, sofern nicht anders angegeben.
+                        Alle Preise verstehen sich in Schweizer Franken (CHF) inklusive gesetzlicher Mehrwertsteuer.
                     </p>
                     <p className={styles.text}>
-                        Versandkosten, die zusätzlich anfallen können, werden dem Kunden vor Abschluss der
-                        Bestellung deutlich mitgeteilt und gesondert ausgewiesen.
+                        Versandkosten werden separat ausgewiesen und sind vor Abschluss des Bestellvorgangs ersichtlich.
                     </p>
                     <p className={styles.text}>
-                        Der Kunde kann per Überweisung, Kreditkarte, PayPal oder anderen angebotenen Zahlungsmethoden
-                        zahlen. Der Anbieter behält sich vor, bestimmte Zahlungsmethoden auszuschliessen.
+                        Als Zahlungsmethoden stehen TWINT, Kreditkarte, PayPal und Vorkasse zur Verfügung.
                     </p>
                     <p className={styles.text}>
-                        Der Rechnungsbetrag ist innerhalb von 14 Tagen nach Erhalt der Rechnung ohne Abzüge zu
-                        begleichen, sofern nichts anderes vereinbart wurde.
-                    </p>
-                    <p className={styles.text}>
-                        Bei Zahlungsverzug ist der Anbieter berechtigt, Verzugszinsen in Höhe von 5 Prozentpunkten
-                        über dem Basiszinssatz zu verlangen. Weitere Ansprüche bleiben vorbehalten.
+                        Der Gesamtbetrag ist sofort zur Zahlung fällig. Bei Zahlungsverzug behält sich der Anbieter vor, Mahngebühren zu erheben.
                     </p>
                 </section>
+
                 <section className={styles.section}>
-                    <h2 className={styles.subtitle}>4. Lieferung und Leistungserbringung</h2>
+                    <h2 className={styles.subtitle}>4. Lieferung</h2>
                     <p className={styles.text}>
-                        Die Lieferung erfolgt an die vom Kunden angegebene Lieferadresse innerhalb der angegebenen
-                        Lieferzeit, die je nach Produkt oder Dienstleistung variieren kann.
+                        Die Lieferung erfolgt innerhalb der Schweiz an die von der Kundschaft angegebene Adresse.
                     </p>
                     <p className={styles.text}>
-                        Der Anbieter ist zu Teillieferungen berechtigt, sofern dies für den Kunden zumutbar ist.
-                        Zusätzliche Versandkosten entstehen dem Kunden hierdurch nicht.
+                        Lieferzeit beträgt in der Regel 2–5 Werktage. Bei Verzögerungen wird die Kundschaft informiert.
                     </p>
                     <p className={styles.text}>
-                        Lieferverzögerungen, die durch höhere Gewalt oder unvorhersehbare Ereignisse (z. B.
-                        Streiks, Naturkatastrophen) entstehen, liegen nicht in der Verantwortung des Anbieters.
-                    </p>
-                    <p className={styles.text}>
-                        Die Gefahr des zufälligen Untergangs oder der Verschlechterung der Ware geht mit Übergabe
-                        an den Kunden oder eine empfangsberechtigte Person über.
+                        Die Gefahr geht mit Übergabe der Ware an das Transportunternehmen auf die Kundschaft über.
                     </p>
                 </section>
+
                 <section className={styles.section}>
-                    <h2 className={styles.subtitle}>5. Widerrufsrecht</h2>
+                    <h2 className={styles.subtitle}>5. Rückgabe & Widerrufsrecht</h2>
                     <p className={styles.text}>
-                        Verbrauchern im Sinne des § 13 BGB steht ein Widerrufsrecht gemäss § 355 BGB zu. Der Kunde
-                        kann seine Vertragserklärung innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen.
+                        Privatkunden haben das Recht, innerhalb von 14 Tagen nach Erhalt der Ware vom Vertrag zurückzutreten.
+                        Die Rückgabe hat in ungebrauchtem und unbeschädigtem Zustand zu erfolgen.
                     </p>
                     <p className={styles.text}>
-                        Die Widerrufsfrist beginnt mit Erhalt der Ware oder, bei Dienstleistungen, mit Abschluss
-                        des Vertrags. Zur Wahrung der Frist genügt die rechtzeitige Absendung des Widerrufs.
+                        Die Kosten für die Rücksendung trägt die Kundschaft, es sei denn, es handelt sich um eine fehlerhafte oder falsche Lieferung.
                     </p>
                     <p className={styles.text}>
-                        Der Widerruf ist schriftlich (z. B. per Brief, E-Mail) an info@campustype.com zu
-                        richten. Ein Muster-Widerrufsformular steht auf der Webseite zur Verfügung.
-                    </p>
-                    <p className={styles.text}>
-                        Im Falle eines wirksamen Widerrufs sind die beiderseits empfangenen Leistungen
-                        zurückzugewähren. Der Kunde trägt die Kosten der Rücksendung, sofern die gelieferte Ware
-                        der bestellten entspricht.
-                    </p>
-                    <p className={styles.text}>
-                        Ausnahmen vom Widerrufsrecht bestehen unter anderem bei Waren, die nach Kundenspezifikation
-                        angefertigt wurden, oder bei digitalen Inhalten, die nicht auf einem physischen Datenträger
-                        geliefert werden.
+                        Vom Widerruf ausgeschlossen sind personalisierte Enten sowie digitale Inhalte.
                     </p>
                 </section>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>6. Gewährleistung und Haftung</h2>
                     <p className={styles.text}>
-                        Es gelten die gesetzlichen Gewährleistungsregelungen gemäss § 434 ff. BGB. Die
-                        Gewährleistungsfrist beträgt zwei Jahre ab Übergabe der Ware.
+                        Es gelten die gesetzlichen Gewährleistungsrechte gemäss Schweizer Obligationenrecht (OR).
                     </p>
                     <p className={styles.text}>
-                        Mängel sind dem Anbieter unverzüglich, spätestens innerhalb von 14 Tagen nach Erhalt der
-                        Ware, schriftlich mitzuteilen.
+                        Der Anbieter haftet nur für direkte Schäden, die durch vorsätzliches oder grobfahrlässiges Verhalten entstanden sind.
                     </p>
                     <p className={styles.text}>
-                        Der Anbieter haftet uneingeschränkt für Vorsatz und grobe Fahrlässigkeit. Für einfache
-                        Fahrlässigkeit haftet der Anbieter nur bei Verletzung wesentlicher Vertragspflichten.
-                    </p>
-                    <p className={styles.text}>
-                        Eine Haftung für indirekte Schäden, entgangenen Gewinn oder Folgeschäden ist ausgeschlossen,
-                        soweit gesetzlich zulässig.
-                    </p>
-                    <p className={styles.text}>
-                        Die vorstehenden Haftungsbeschränkungen gelten nicht bei Verletzung von Leben, Körper oder
-                        Gesundheit oder bei arglistigem Verschweigen von Mängeln.
+                        Für indirekte Schäden oder Folgeschäden wird, soweit gesetzlich zulässig, keine Haftung übernommen.
                     </p>
                 </section>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>7. Datenschutz</h2>
                     <p className={styles.text}>
-                        Der Anbieter erhebt, verarbeitet und nutzt personenbezogene Daten des Kunden ausschliesslich
-                        im Rahmen der geltenden Datenschutzgesetze, insbesondere der DSGVO.
+                        Die Daten der Kundschaft werden gemäss Schweizer Datenschutzgesetz (DSG) verarbeitet.
                     </p>
                     <p className={styles.text}>
-                        Einzelheiten zur Datenverarbeitung, einschliesslich Zweck, Umfang und Rechtsgrundlage, sind
-                        in der Datenschutzerklärung auf der Webseite einsehbar.
-                    </p>
-                    <p className={styles.text}>
-                        Der Kunde hat das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der
-                        Verarbeitung seiner Daten sowie das Recht auf Datenübertragbarkeit.
+                        Weitere Informationen sind in der Datenschutzerklärung auf duckyshop.ch zu finden.
                     </p>
                 </section>
+
                 <section className={styles.section}>
                     <h2 className={styles.subtitle}>8. Eigentumsvorbehalt</h2>
                     <p className={styles.text}>
-                        Die gelieferte Ware bleibt bis zur vollständigen Bezahlung im Eigentum des Anbieters.
-                    </p>
-                    <p className={styles.text}>
-                        Der Kunde ist verpflichtet, die Ware während des Eigentumsvorbehalts pfleglich zu
-                        behandeln und vor Beschädigung oder Verlust zu schützen.
-                    </p>
-                    <p className={styles.text}>
-                        Bei Pfändungen oder sonstigen Eingriffen Dritter hat der Kunde den Anbieter unverzüglich
-                        zu informieren.
+                        Die Ware bleibt bis zur vollständigen Bezahlung Eigentum des Anbieters.
                     </p>
                 </section>
+
                 <section className={styles.section}>
-                    <h2 className={styles.subtitle}>9. Streitbeilegung</h2>
+                    <h2 className={styles.subtitle}>9. Gerichtsstand und anwendbares Recht</h2>
                     <p className={styles.text}>
-                        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit,
-                        die unter http://ec.europa.eu/consumers/odr erreichbar ist.
-                    </p>
-                    <p className={styles.text}>
-                        Der Anbieter ist nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor
-                        einer Verbraucherschlichtungsstelle teilzunehmen.
-                    </p>
-                    <p className={styles.text}>
-                        Für Beschwerden steht dem Kunden der Kundenservice unter info@campustype.com zur
-                        Verfügung.
+                        Es gilt ausschliesslich Schweizer Recht. Gerichtsstand ist der Sitz des Anbieters in Bern, sofern kein anderer zwingender gesetzlicher Gerichtsstand besteht.
                     </p>
                 </section>
+
                 <section className={styles.section}>
-                    <h2 className={styles.subtitle}>10. Schlussbestimmungen</h2>
+                    <h2 className={styles.subtitle}>10. Kontakt</h2>
                     <p className={styles.text}>
-                        Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.
-                    </p>
-                    <p className={styles.text}>
-                        Gerichtsstand für alle Streitigkeiten aus diesem Vertrag ist Bern, sofern der Kunde
-                        kein Verbraucher ist.
-                    </p>
-                    <p className={styles.text}>
-                        Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam sein oder werden,
-                        bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
-                    </p>
-                    <p className={styles.text}>
-                        Änderungen oder Ergänzungen des Vertrags bedürfen der Schriftform. Dies gilt auch für die
-                        Aufhebung dieses Schriftformerfordernisses.
-                    </p>
-                    <p className={styles.text}>
-                        Der Anbieter behält sich vor, diese AGB jederzeit mit Wirkung für die Zukunft zu ändern.
-                        Der Kunde wird über Änderungen rechtzeitig per E-Mail oder auf der Webseite informiert.
+                        Fragen zu den AGB oder Beschwerden können per E-Mail an <strong>info@duckyshop.ch</strong> gerichtet werden.
                     </p>
                 </section>
             </div>
