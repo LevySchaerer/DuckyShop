@@ -1,88 +1,96 @@
 import styles from '../styles/agb.module.css';
- 
-export default function Termsconditions() {
+
+export default function PrivacyPolicy() {
     return (
-<div className={styles.body}>
-<div className={styles.container}>
-<h1 className={styles.title}>Datenschutzerklärung</h1>
-<p className={styles.date}>Stand: April 2025</p>
- 
+        <div className={styles.body}>
+            <div className={styles.container}>
+                <h1 className={styles.title}>Datenschutzerklärung</h1>
+                <p className={styles.date}>Stand: April 2025</p>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>1. Allgemeine Hinweise</h2>
-<p className={styles.text}>
-                        Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir verarbeiten Ihre Daten daher ausschliesslich auf Grundlage der gesetzlichen Bestimmungen.
-</p>
-<p className={styles.text}>
-                        In dieser Datenschutzerklärung informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer Website.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>1. Allgemeine Hinweise</h2>
+                    <p className={styles.text}>
+                        Der Schutz Ihrer persönlichen Daten ist uns ein zentrales Anliegen. Wir behandeln Ihre Daten vertraulich und gemäss den geltenden Datenschutzbestimmungen der Schweiz (DSG).
+                    </p>
+                    <p className={styles.text}>
+                        Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Erhebung und Verwendung personenbezogener Daten auf unserer Website duckyshop.ch.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>2. Kontakt mit uns</h2>
-<p className={styles.text}>
-                        Wenn Sie per Formular auf der Website oder per E-Mail Kontakt mit uns aufnehmen, werden Ihre angegebenen Daten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen sechs Monate bei uns gespeichert.
-</p>
-<p className={styles.text}>
-                        Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>2. Kontaktaufnahme</h2>
+                    <p className={styles.text}>
+                        Wenn Sie per Formular oder per E-Mail mit uns Kontakt aufnehmen, werden Ihre Angaben (Name, E-Mail, Nachricht) zwecks Bearbeitung der Anfrage bei uns gespeichert.
+                    </p>
+                    <p className={styles.text}>
+                        Diese Daten geben wir nicht ohne Ihre ausdrückliche Einwilligung weiter. Die Speicherung erfolgt maximal sechs Monate, sofern keine gesetzliche Aufbewahrungspflicht besteht.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>3. Datenspeicherung</h2>
-<p className={styles.text}>
-                        Folgende Daten auch bei uns gespeichert: Username, Name, E-Mail-Adresse, Adresse, Zahlungsinformationen. Die von Ihnen bereitgestellten Daten sind zur Vertragserfüllung bzw. zur Durchführung vorvertraglicher Massnahmen erforderlich.
-</p>
-<p className={styles.text}>
-                        Ohne diese Daten können wir den Vertrag mit Ihnen nicht abschliessen. Eine Datenübermittlung an Dritte erfolgt nicht, mit Ausnahme der Übermittlung an unsere Zahlungsdienstleister zur Abbuchung des Einkaufspreises sowie an unseren Steuerberater zur Erfüllung unserer steuerrechtlichen Verpflichtungen.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>3. Datenspeicherung im Shop</h2>
+                    <p className={styles.text}>
+                        Zum Zweck der Vertragsabwicklung speichern wir folgende Daten: Benutzername, Name, Adresse, E-Mail-Adresse, Zahlungsinformationen. Diese Daten sind erforderlich, um den Kaufvertrag zu erfüllen.
+                    </p>
+                    <p className={styles.text}>
+                        Eine Datenweitergabe erfolgt nur an:
+                        <ul>
+                            <li>Zahlungsdienstleister (z. B. TWINT, Stripe, PayPal) zur Zahlungsabwicklung</li>
+                            <li>unser Treuhandbüro zur Erfüllung gesetzlicher Buchhaltungspflichten</li>
+                        </ul>
+                    </p>
+                    <p className={styles.text}>
+                        Eine weitergehende Datenweitergabe oder Datenverarbeitung findet nicht statt.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>4. Cookies</h2>
-<p className={styles.text}>
-                        Unsere Website verwendet sogenannte Cookies. Dabei handelt es sich um kleine Textdateien, die mit Hilfe des Browsers auf Ihrem Endgerät abgelegt werden. Sie richten keinen Schaden an.
-</p>
-<p className={styles.text}>
-                        Wir nutzen Cookies dazu, unser Angebot nutzerfreundlich zu gestalten. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen.
-</p>
-<p className={styles.text}>
-                        Sie ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Wenn Sie dies nicht wünschen, so können Sie Ihren Browser so einrichten, dass er Sie über das Setzen von Cookies informiert und Sie dies nur im Einzelfall erlauben.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>4. Cookies</h2>
+                    <p className={styles.text}>
+                        Unsere Website verwendet Cookies, um die Benutzererfahrung zu verbessern. Dabei handelt es sich um kleine Textdateien, die auf Ihrem Endgerät gespeichert werden.
+                    </p>
+                    <p className={styles.text}>
+                        Manche Cookies bleiben auf Ihrem Gerät, bis Sie sie löschen. Sie ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.
+                    </p>
+                    <p className={styles.text}>
+                        Sie können Ihren Browser so konfigurieren, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>5. Web-Analyse</h2>
-<p className={styles.text}>
-                        Unsere Website verwendet Funktionen des Webanalysedienstes Google Analytics. Dazu werden Cookies verwendet, die eine Analyse der Benutzung der Website durch Ihre Benutzer ermöglicht.
-</p>
-<p className={styles.text}>
-                        Die dadurch erzeugten Informationen werden auf den Server des Anbieters übertragen und dort gespeichert. Sie können dies verhindern, indem Sie Ihren Browser so einrichten, dass keine Cookies gespeichert werden.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>5. Webanalyse mit Google Analytics</h2>
+                    <p className={styles.text}>
+                        Unsere Website nutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet Cookies, die eine Analyse der Benutzung der Website ermöglichen.
+                    </p>
+                    <p className={styles.text}>
+                        Die dadurch erzeugten Informationen werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.
+                    </p>
+                    <p className={styles.text}>
+                        IP-Adressen werden anonymisiert (IP-Masking). Sie können die Erfassung Ihrer Daten durch Google Analytics durch ein Browser-Add-on verhindern: <a href="https://tools.google.com/dlpage/gaoptout?hl=de">Google Opt-out</a>.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>6. Ihre Rechte</h2>
-<p className={styles.text}>
-                        Ihnen stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu.
-</p>
-<p className={styles.text}>
-                        Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstösst oder Ihre datenschutzrechtlichen Ansprüche sonst in einer Weise verletzt worden sind, können Sie sich bei der Aufsichtsbehörde beschweren.
-</p>
-</section>
- 
+                    <h2 className={styles.subtitle}>6. Ihre Rechte</h2>
+                    <p className={styles.text}>
+                        Ihnen stehen die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch zu.
+                    </p>
+                    <p className={styles.text}>
+                        Sie können Ihre Rechte jederzeit per E-Mail an uns geltend machen. Ausserdem steht Ihnen das Recht zu, eine Beschwerde beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) einzureichen.
+                    </p>
+                </section>
+
                 <section className={styles.section}>
-<h2 className={styles.subtitle}>7. Kontaktinformationen</h2>
-<p className={styles.text}>
-                        Verantwortlich für die Datenverarbeitung:
-</p>
-<p className={styles.text}>
+                    <h2 className={styles.subtitle}>7. Kontakt</h2>
+                    <p className={styles.text}>
+                        Verantwortlich für die Datenverarbeitung:<br />
                         DuckyType<br />
                         Engehaldenstrasse 26<br />
-                        3000 Bern, Schweiz<br />
-                        E-Mail: olivier@deszynskicom
-</p>
-</section>
-</div>
-</div>
+                        3012 Bern, Schweiz<br />
+                        E-Mail: olivier@deszynski.com
+                    </p>
+                </section>
+            </div>
+        </div>
     );
 }
