@@ -26,6 +26,8 @@
 }
 
 .cart {
+    display: flex;
+    flex-direction: column;
     background: rgb(61, 61, 61);
     height: 100%;
     width: 400px;
@@ -51,21 +53,89 @@
     cursor: pointer;
 }
 
-.cartItems {
-
-}
-
 .cartItem {
     display: flex;
+    justify-content: space-between;
     background-color: rgb(49, 49, 49);
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
 }
 
+.leftDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.leftSection {
+    display: flex;
+}
+
+.name {
+    font-weight: 300;
+}
+
+.price {
+    display: flex;
+    align-self: flex-end;
+    width: fit-content;
+    border-bottom: solid 1px white;
+}
+
+.stockDisplay {
+    margin-top: 5px;
+    display: flex;
+}
+
+.stock {
+    margin: 0 8px;
+}
+
 .ducky {
-    height: 40px;
+    display: flex;
+    align-self: center;
+    height: 60px;
     width: auto;
+    margin: 0 10px;
+}
+
+.checkoutButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
+    overflow: hidden;
+    padding: 12px 0;
+    background-color: #242424;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 6px;
+    position: relative;
+}
+
+.checkoutButton:hover .checkoutIcon {
+    visibility: visible;
+    transform: translateX(0px);
+}
+
+.checkoutButton:hover .chackoutText {
+    transform: translateX(400px);
+}
+
+.chackoutText {
+    transition: all 0.3s ease;
+}
+
+.checkoutIcon {
+    visibility: hidden;
+    position: absolute;
+    transform: translateX(-400px);
+    transition: all 0.3s ease;
 }
 
 @media (prefers-color-scheme: light) {

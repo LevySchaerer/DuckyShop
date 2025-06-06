@@ -3,6 +3,9 @@ import styles from './Cart.module.css';
 import { IoClose } from "react-icons/io5";
 import ducky from '../../public/RubberDucky.jpg'
 import Image from 'next/image';
+import { CiCirclePlus } from "react-icons/ci";
+import { CiCircleMinus } from "react-icons/ci";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const Cart = ({ isOpen, onClose }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -74,14 +77,18 @@ const Cart = ({ isOpen, onClose }) => {
                             {cart.map((product, i) => {
                                 return (
                                     <div key={i} className={styles.cartItem}>
-                                        <Image src={product.image} alt="ducky" className={styles.ducky} />
-                                        <div className={styles.cartItemDetails}>
-                                            <h4>{product.price}</h4>
-                                            <h4>{product.name}</h4>
-                                            <h4>{product.stock}</h4>
-                                            <button onClick={() => decreaseStock(i)}>-</button>
-                                            <button onClick={() => increaseStock(i)}>+</button>
+                                        <div className={styles.leftSection}>
+                                            <Image src={product.image} alt="ducky" className={styles.ducky} />
+                                            <div className={styles.leftDetails}>
+                                                <h5 className={styles.name}>{product.name}</h5>
+                                                <div className={styles.stockDisplay}>
+                                                    <CiCircleMinus size={23} onClick={() => decreaseStock(i)}/>
+                                                    <h4 className={styles.stock}>{product.stock}</h4>
+                                                    <CiCirclePlus size={23} onClick={() => increaseStock(i)}/>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <h4 className={styles.price}>{product.price} Fr</h4>
                                     </div>
                                 )
                             })}
@@ -90,6 +97,7 @@ const Cart = ({ isOpen, onClose }) => {
                         <h3>{sum.toFixed(1)}0 Fr</h3>
                     </>
                 )}
+                <button className={styles.checkoutButton}><TbTruckDelivery size={30} className={styles.checkoutIcon}/><span className={styles.chackoutText}>Checkout</span></button>
             </div>
         </div>
     );
