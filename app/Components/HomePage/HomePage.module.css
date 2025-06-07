@@ -20,14 +20,24 @@
 }
 
 .arrow {
+    position: fixed;
+    left: 50%;
     cursor: pointer;
     color: #8a8a8a;
     transition: transform 0.2s;
     z-index: 10;
 }
 
+.arrowLeft {
+    transform: translateX(-600px);
+}
+
+.arrowRight {
+    transform: translateX(600px);
+}
+
 .arrow:hover {
-    transform: scale(1.2);
+    color: #c0c0c0;
 }
 
 .sliderWrapper {
@@ -40,11 +50,12 @@
 }
 
 .slide {
-    min-width: 100%;
+    min-width: 600px;
+    max-width: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: scale(0.8);
+    transform: scale(0.4);
     opacity: 0.5;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
