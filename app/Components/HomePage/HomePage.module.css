@@ -9,7 +9,6 @@
     flex-direction: column;
     width: 100%;
     height: 360px;
-    margin-top: 200px;
     align-items: center;
 }
 
@@ -43,6 +42,7 @@
 }
 
 .sliderWrapper {
+    margin-top: 200px;
     width: 100%;
 }
 
@@ -79,6 +79,7 @@
     border-radius: 8px;
     margin-top: 10px;
     background-color: #85B8FF;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -93,4 +94,17 @@
 .name {
     font-size: 15px;
     font-weight: 100;
+}
+
+.pageTitle {
+    position: relative;
+    font-size: 60px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #85B8FF, #0048ac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pageSubTitle {
+
 }

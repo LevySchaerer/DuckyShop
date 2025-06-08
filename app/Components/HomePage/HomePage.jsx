@@ -44,7 +44,7 @@ export default function HomePage() {
     useEffect(() => {
     const interval = setInterval(() => {
         next();
-    }, 10000);
+    }, 7000);
 
     return () => clearInterval(interval);
 }, []);
@@ -71,7 +71,8 @@ export default function HomePage() {
     return (
         <div className={styles.body}>
             <div className={styles.container}>
-                <h1>The Best Shop</h1>
+                <h1 className={styles.pageTitle}><span className="shineText"/>Premium Rubber Ducks</h1>
+                <h5 className={styles.pageSubTitle}>Discover the world's finest collection of luxury rubber ducks</h5>
 
                 <div className={styles.sliderWrapper}>
                     <div className={styles.slider} style={{ transform: `translateX(${calculateSliderDiff(index)}px)` }}>
