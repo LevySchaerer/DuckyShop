@@ -1,4 +1,3 @@
-"use client"
 import Image from "next/image";
 import styles from './HomePage.module.css'
 import ducky from '../../public/RubberDucky.jpg'
@@ -42,6 +41,14 @@ export default function HomePage() {
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
 
+    useEffect(() => {
+    const interval = setInterval(() => {
+        next();
+    }, 7000);
+
+    return () => clearInterval(interval);
+}, []);
+
     function calculateSliderDiff(index) {
         const range = (products.length - 1) * 300;
         const middle = (products.length - 1) / 2;
@@ -64,6 +71,8 @@ export default function HomePage() {
     return (
         <div className={styles.body}>
             <div className={styles.container}>
+                <h1 className={styles.pageTitle}><span className="shineText"/>Premium Rubber Ducks</h1>
+                <h5 className={styles.pageSubTitle}>Discover the world's finest collection of luxury rubber ducks</h5>
 
                 <div className={styles.sliderWrapper}>
                     <div className={styles.slider} style={{ transform: `translateX(${calculateSliderDiff(index)}px)` }}>
@@ -71,9 +80,9 @@ export default function HomePage() {
                             <div key={i} className={`${styles.slide} ${i === index ? styles.active : ''}`}>
                                 <Image src={product.image} alt="ducky" className={styles.ducky} />
                                 <div className={styles.details}>
-                                    <h1>{product.price} Fr</h1>
-                                    <h2>{product.name}</h2>
-                                    <button onClick={() => addToCart(product)}>Add to Cart</button>
+                                    <h1 className={styles.price}>{product.price} Fr</h1>
+                                    <h2 className={styles.name}>{product.name}</h2>
+                                    <button className={styles.cartButton} onClick={() => addToCart(product)}>Add to Cart</button>
                                 </div>
                             </div>
                         ))}
