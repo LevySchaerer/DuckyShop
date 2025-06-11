@@ -25,6 +25,13 @@
     font-size: 1.8rem;
 }
 
+.subTitle {
+    margin-left: 10px;
+    color: #60a5ff;
+    font-size: 22px;
+    font-weight: 500;
+} 
+
 @media (prefers-color-scheme: dark) {
     .header {
         background-color: #1a1a1a;

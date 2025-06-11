@@ -18,7 +18,7 @@ export default function AboutUs() {
         <div className={styles.container}>
             <div className={styles.StartScreen}>
                 <h1 className={styles.title}>Our Team</h1>
-                <h3 className={styles.subTitle}>Get to know the team behind duckyshop.</h3>
+                <h3 className={styles.subTitle}>Get to know the team behind DUCKYSHOP.</h3>
                 <div className={styles.bubble}></div>
                 <div className={styles.bubble}></div>
                 <div className={styles.bubble}></div>
@@ -33,7 +33,7 @@ export default function AboutUs() {
                     <h1 className={styles.personName}>Cyrill Gammeter</h1>
                     <div className={styles.profilePoints}><FaCode size={25}/> Frontend Developer</div>
                     <div className={styles.profilePoints}><IoIosFootball size={25}/> Football Player</div>
-                    <div className={styles.profilePoints}><FaRegFaceLaugh size={25}/> Mouth breather</div>
+                    <div className={styles.profilePoints}><FaRegFaceLaugh size={25}/> Mous breather</div>
                     <div className={styles.profilePoints}><MdFamilyRestroom size={25}/> Loves his Family</div>
                 </div>
             </div>
