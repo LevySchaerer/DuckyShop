@@ -1,0 +1,75 @@
+
+.body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topSelector {
+    position: absolute;
+}
+
+.selectorButton {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+.active {
+    border-bottom: solid 3px #3b82f6;
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.products {
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    background-color: #223c668a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px;
+    width: 50rem;
+}
+
+.productContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+.productEdit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.editIcons {
+    cursor: pointer;
+}
+
+.duckyImage {
+    width: 60px;
+    height: auto;
+}
+
+.stages {
+    display: flex;
+    flex-direction: row;
+}
+
+.stage1, .stage2, .stage3 {
+    height: 80vh;
+    width: 400px;
+    border: solid 2px white;
+    margin: 10px;
+    border-radius: 12px;
+}
