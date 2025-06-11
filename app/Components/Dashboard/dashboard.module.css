@@ -69,7 +69,13 @@
 .stage1, .stage2, .stage3 {
     height: 80vh;
     width: 400px;
-    border: solid 2px white;
+    border: solid 1px white;
     margin: 10px;
     border-radius: 12px;
+}
+
+.stageTitle {
+    color: #3b82f6;
+    margin-top: -40px;
+    padding: 0 10px;
 }

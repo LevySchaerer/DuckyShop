@@ -40,7 +40,102 @@ const products = [
     }
 ];
 
-
+const orders = [
+  {
+    OrderID: "1",
+    UserID: "1",
+    Products: [
+      { ProductID: "1", Name: "Laptop", Price: 999.99, Quantity: 1 },
+      { ProductID: "2", Name: "Mouse", Price: 29.99, Quantity: 2 }
+    ],
+    OrderDate: "2025-06-11",
+    State: "D"
+  },
+  {
+    OrderID: "2",
+    UserID: "2",
+    Products: [
+      { ProductID: "3", Name: "Keyboard", Price: 59.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-10",
+    State: "D"
+  },
+  {
+    OrderID: "3",
+    UserID: "3",
+    Products: [
+      { ProductID: "4", Name: "Monitor", Price: 199.99, Quantity: 1 },
+      { ProductID: "5", Name: "Headphones", Price: 79.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-09",
+    State: "C"
+  },
+  {
+    OrderID: "4",
+    UserID: "1",
+    Products: [
+      { ProductID: "6", Name: "Webcam", Price: 89.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-08",
+    State: "D"
+  },
+  {
+    OrderID: "5",
+    UserID: "4",
+    Products: [
+      { ProductID: "7", Name: "Speaker", Price: 149.99, Quantity: 2 }
+    ],
+    OrderDate: "2025-06-07",
+    State: "P"
+  },
+  {
+    OrderID: "6",
+    UserID: "5",
+    Products: [
+      { ProductID: "8", Name: "Tablet", Price: 299.99, Quantity: 1 },
+      { ProductID: "9", Name: "Stylus", Price: 49.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-06",
+    State: "C"
+  },
+  {
+    OrderID: "7",
+    UserID: "2",
+    Products: [
+      { ProductID: "10", Name: "Mouse Pad", Price: 19.99, Quantity: 3 }
+    ],
+    OrderDate: "2025-06-05",
+    State: "D"
+  },
+  {
+    OrderID: "8",
+    UserID: "3",
+    Products: [
+      { ProductID: "11", Name: "External Drive", Price: 129.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-04",
+    State: "P"
+  },
+  {
+    OrderID: "9",
+    UserID: "4",
+    Products: [
+      { ProductID: "12", Name: "USB Hub", Price: 39.99, Quantity: 2 },
+      { ProductID: "13", Name: "Cable", Price: 9.99, Quantity: 4 }
+    ],
+    OrderDate: "2025-06-03",
+    State: "C"
+  },
+  {
+    OrderID: "10",
+    UserID: "5",
+    Products: [
+      { ProductID: "14", Name: "Printer", Price: 249.99, Quantity: 1 }
+    ],
+    OrderDate: "2025-06-02",
+    State: "P"
+  }
+];
 
 export default function Dashboard() {
     const [auth, setAuth] = useState(true)
@@ -99,13 +194,43 @@ export default function Dashboard() {
                 {selectedTab === 'Orders' && (
                     <div className={styles.stages}>
                         <div className={styles.stage1}>
-
+                            <h2 className={styles.stageTitle}>Confirm Payment</h2>
+                            {orders.map((order, i) => {
+                                if (order.State === "P") {
+                                    return (
+                                        <div>
+                                            <h1>{order.State}</h1>
+                                        </div>
+                                    )
+                                }
+                            })
+                            }
                         </div>
                         <div className={styles.stage2}>
-
+                            <h2 className={styles.stageTitle}>Delivery</h2>
+                            {orders.map((order, i) => {
+                                if (order.State === "D") {
+                                    return (
+                                        <div>
+                                            <h1>{order.State}</h1>
+                                        </div>
+                                    )
+                                }
+                            })
+                            }
                         </div>
                         <div className={styles.stage3}>
-
+                            <h2 className={styles.stageTitle}>Completed</h2>
+                            {orders.map((order, i) => {
+                                if (order.State === "C") {
+                                    return (
+                                        <div>
+                                            <h1>{order.State}</h1>
+                                        </div>
+                                    )
+                                }
+                            })
+                            }
                         </div>
                     </div>
                 )}
