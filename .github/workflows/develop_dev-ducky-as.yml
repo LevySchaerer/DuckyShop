@@ -2,11 +2,10 @@ name: 'Pipeline-React-Main'
 on:
   push:
     branches:
-      - Develop
+      - master
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
@@ -19,9 +18,10 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.CLIENT_ID}}
-          tenant-id: ${{ secrets.TENANT_ID}}
-          subscription-id: ${{ secrets.SUBSCRIPTION_ID}}
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
 
       - name: Deploy WebApp
         id: deploy-to-webapp
