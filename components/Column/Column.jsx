@@ -9,7 +9,8 @@ export default function Column({ id, orders, title, state }) {
         id: id,
         data: {
             type: 'column',
-            state: state
+            state: state,
+            accepts: ['order']
         }
     })
 
@@ -17,6 +18,10 @@ export default function Column({ id, orders, title, state }) {
         <div 
             ref={setNodeRef} 
             className={`${styles.column} ${isOver ? styles.columnOver : ''}`}
+            style={{
+                minHeight: '300px',
+                transition: 'all 0.2s ease'
+            }}
         >
             <h1>{title}</h1>
             <SortableContext items={orders.map((order) => order.OrderID)} strategy={verticalListSortingStrategy}>

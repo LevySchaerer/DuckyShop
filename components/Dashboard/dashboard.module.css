@@ -95,3 +95,11 @@
 .columns {
     display: flex;
 }
+
+.dragOverlay {
+    display: flex;
+    background: #27272780;
+    height: 30px;
+    width: 200px;
+    margin: 5px 0;
+}
