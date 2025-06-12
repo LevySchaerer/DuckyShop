@@ -26,10 +26,10 @@ jobs:
 
       - name: Prepare artifact for deployment
         run: |
-          # Clean up everything except what Azure needs for build and start
           mkdir deploy
-          cp -r package.json package-lock.json public next.config.js deploy/
-          cp -r .next deploy/
+          cp package.json package-lock.json public ./deploy/ 2>/dev/null || true
+          cp -r .next ./deploy/
+          if [ -f next.config.js ]; then cp next.config.js ./deploy/; fi
         shell: bash
 
       - name: Upload artifact
