@@ -156,6 +156,49 @@ export default function Dashboard() {
     }
   }
 
+  // Handle drag end event
+  const handleDragEnd = (event) => {
+    const { active, over } = event
+
+    if (!over) return
+
+    const activeOrderId = active.id
+    const overContainerId = over.id
+
+    // Find the active order
+    const activeOrder = orders.find(order => order.OrderID === activeOrderId)
+    if (!activeOrder) return
+
+    // Determine new state based on container
+    let newState
+    if (overContainerId === 'payment-column' || over.data?.current?.type === 'column' && over.data.current.state === 'P') {
+      newState = 'P'
+    } else if (overContainerId === 'delivery-column' || over.data?.current?.type === 'column' && over.data.current.state === 'D') {
+      newState = 'D'
+    } else if (overContainerId === 'completed-column' || over.data?.current?.type === 'column' && over.data.current.state === 'C') {
+      newState = 'C'
+    } else {
+      // If dropped on another order, get the state of that order's column
+      const overOrder = orders.find(order => order.OrderID === over.id)
+      if (overOrder) {
+        newState = overOrder.State
+      } else {
+        return // Invalid drop
+      }
+    }
+
+    // Update the order state if it changed
+    if (activeOrder.State !== newState) {
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.OrderID === activeOrderId 
+            ? { ...order, State: newState }
+            : order
+        )
+      )
+    }
+  }
+
   if (!auth) {
     return (
       <div className={styles.loginContainer}>
@@ -197,11 +240,26 @@ export default function Dashboard() {
           </div>
         )}
         {selectedTab === 'Orders' && (
-          <DndContext collisionDetection={closestCorners}>
+          <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
             <div className={styles.columns}>
-              <Column orders={orders.filter(order => order.State === 'P')} title={"Payment"}/>
-              <Column orders={orders.filter(order => order.State === 'D')} title={"Delivery"}/>
-              <Column orders={orders.filter(order => order.State === 'C')} title={"Completed"} />
+              <Column 
+                id="payment-column"
+                orders={orders.filter(order => order.State === 'P')} 
+                title={"Payment"}
+                state="P"
+              />
+              <Column 
+                id="delivery-column"
+                orders={orders.filter(order => order.State === 'D')} 
+                title={"Delivery"}
+                state="D"
+              />
+              <Column 
+                id="completed-column"
+                orders={orders.filter(order => order.State === 'C')} 
+                title={"Completed"}
+                state="C"
+              />
             </div>
           </DndContext>
         )}
@@ -209,4 +267,3 @@ export default function Dashboard() {
     </div>
   )
 }
-
