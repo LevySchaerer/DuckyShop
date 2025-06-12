@@ -21,21 +21,32 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install, build, and test
+      - name: Clean install dependencies
         run: |
+          # Clean install to ensure all packages are properly installed
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
           npm install
+
+      - name: Build application
+        run: |
           npm run build --if-present
+
+      - name: Run tests
+        run: |
           npm run test --if-present
 
       - name: List directory to verify build output
         run: ls -alh
 
+      - name: Install production dependencies only
+        run: |
+          # Clean install production dependencies
+          rm -rf node_modules
+          npm ci --only=production
+
       - name: Create deployment package
         run: |
-          # Remove development dependencies and clean cache
-          npm prune --production
-          npm cache clean --force
-          
           # Create deployment package with all necessary files
           zip -r release.zip . \
             -x "*.git*" \
@@ -45,7 +56,10 @@ jobs:
             -x "tests/*" \
             -x "__tests__/*" \
             -x "*.test.js" \
-            -x "*.spec.js"
+            -x "*.spec.js" \
+            -x ".github/*" \
+            -x "cypress/*" \
+            -x "*.log"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
