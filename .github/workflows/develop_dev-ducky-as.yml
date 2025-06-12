@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Required for actions/checkout
+      contents: read
  
     steps:
       - name: Checkout repository
@@ -27,19 +27,18 @@ jobs:
           npm run build --if-present
           npm run test --if-present
  
-      - name: List directory to verify build output
-        run: ls -alh
+      - name: List all files after build (debug)
+        run: find . -type f
  
-      - name: Zip artifact for deployment
+      - name: Detect and zip build folder for deployment
         run: |
-          if [ -d build ]; then
-            zip -r release.zip build
-          elif [ -d dist ]; then
-            zip -r release.zip dist
-          else
-            echo "❌ Neither 'build' nor 'dist' directory exists. Check your build output."
+          ARTIFACT_FOLDER=$(find . -maxdepth 1 -type d \( -name 'build' -o -name 'dist' -o -name 'out' -o -name '.next' \) | head -n 1 | sed 's|./||')
+          if [ -z "$ARTIFACT_FOLDER" ]; then
+            echo "❌ No build output folder found (build, dist, out, .next)"
             exit 1
           fi
+          echo "Using build output folder: $ARTIFACT_FOLDER"
+          zip -r release.zip "$ARTIFACT_FOLDER"
  
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
