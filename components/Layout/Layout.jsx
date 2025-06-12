@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Header from '../Header/Header';
+import Header from '../Header/header';
 import Head from 'next/head';
 import styles from './Layout.module.css';
 import { Bounce, ToastContainer } from 'react-toastify';
-import Footer from '../Footer/Footer';
+import Footer from '../Footer/footer';
 
 const Layout = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
