@@ -9,34 +9,49 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Required for actions/checkout
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
 
-      - name: Install dependencies and build
+      - name: npm install, build, and test
         run: |
-          npm ci
-          npm run build
-          npm run lint --if-present
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
-      - name: Prepare artifact for deployment
+      - name: List directory to verify build output
+        run: ls -alh
+
+      - name: Create deployment package
         run: |
-          mkdir deploy
-          cp package.json package-lock.json public ./deploy/ 2>/dev/null || true
-          cp -r .next ./deploy/
-          if [ -f next.config.js ]; then cp next.config.js ./deploy/; fi
-        shell: bash
+          # Remove development dependencies and clean cache
+          npm prune --production
+          npm cache clean --force
+          
+          # Create deployment package with all necessary files
+          zip -r release.zip . \
+            -x "*.git*" \
+            -x "node_modules/.cache/*" \
+            -x "*.md" \
+            -x ".env*" \
+            -x "tests/*" \
+            -x "__tests__/*" \
+            -x "*.test.js" \
+            -x "*.spec.js"
 
-      - name: Upload artifact
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: deploy
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,11 +61,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          path: deploy
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -58,5 +72,5 @@ jobs:
         with:
           app-name: 'dev-ducky-as'
           slot-name: 'Production'
-          package: deploy
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75BA8F04F8EA4BD3869E7C92764B2217 }}
