@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import styles from './Header.module.css';
+import styles from './header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
