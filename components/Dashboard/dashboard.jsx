@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-import { closestCorners, DndContext } from '@dnd-kit/core'
+import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
 
 const token = '9d01b00876449148347bf4c01395553173fcaa479db1925b706974c1b06f7126'
@@ -147,6 +147,7 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Products')
 
   const [orders, setOrders] = useState(ordersArray)
+  const [activeOrder, setActiveOrder] = useState(null)
 
   const authCheck = () => {
     if (sha256(password).toString() === token) {
@@ -156,20 +157,30 @@ export default function Dashboard() {
     }
   }
 
-  // Handle drag end event
+  // Handle drag over event for better visual feedback
+  const handleDragOver = (event) => {
+    const { over } = event
+    // This helps maintain consistent hover state
+  }
+  const handleDragStart = (event) => {
+    const { active } = event
+    const activeOrderData = orders.find(order => order.OrderID === active.id)
+    setActiveOrder(activeOrderData)
+  }
+
   const handleDragEnd = (event) => {
     const { active, over } = event
+
+    setActiveOrder(null)
 
     if (!over) return
 
     const activeOrderId = active.id
     const overContainerId = over.id
 
-    // Find the active order
     const activeOrder = orders.find(order => order.OrderID === activeOrderId)
     if (!activeOrder) return
 
-    // Determine new state based on container
     let newState
     if (overContainerId === 'payment-column' || over.data?.current?.type === 'column' && over.data.current.state === 'P') {
       newState = 'P'
@@ -178,16 +189,14 @@ export default function Dashboard() {
     } else if (overContainerId === 'completed-column' || over.data?.current?.type === 'column' && over.data.current.state === 'C') {
       newState = 'C'
     } else {
-      // If dropped on another order, get the state of that order's column
       const overOrder = orders.find(order => order.OrderID === over.id)
       if (overOrder) {
         newState = overOrder.State
       } else {
-        return // Invalid drop
+        return
       }
     }
 
-    // Update the order state if it changed
     if (activeOrder.State !== newState) {
       setOrders(prevOrders => 
         prevOrders.map(order => 
@@ -197,6 +206,7 @@ export default function Dashboard() {
         )
       )
     }
+    console.log(orders)
   }
 
   if (!auth) {
@@ -240,7 +250,12 @@ export default function Dashboard() {
           </div>
         )}
         {selectedTab === 'Orders' && (
-          <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+          <DndContext 
+            collisionDetection={closestCorners} 
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+          >
             <div className={styles.columns}>
               <Column 
                 id="payment-column"
@@ -261,6 +276,14 @@ export default function Dashboard() {
                 state="C"
               />
             </div>
+            <DragOverlay>
+              {activeOrder ? (
+                <div className={styles.dragOverlay}>
+                  <h3>{activeOrder.OrderID}</h3>
+                  <p>State {activeOrder.State}</p>
+                </div>
+              ) : null}
+            </DragOverlay>
           </DndContext>
         )}
       </div>
