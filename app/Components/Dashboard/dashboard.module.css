@@ -67,6 +67,7 @@
 }
 
 .stage1, .stage2, .stage3 {
+    padding: 0 20px;
     height: 80vh;
     width: 400px;
     border: solid 1px white;
@@ -76,6 +77,21 @@
 
 .stageTitle {
     color: #3b82f6;
-    margin-top: -40px;
+    margin-top: -30px;
     padding: 0 10px;
+}
+
+
+
+.orderState1, .orderState2, .orderState3 {
+    margin: 10px 0;
+    background: #3b83f644;
+}
+
+.orderState3 {
+    background: #1eb61062;
+}
+
+.columns {
+    display: flex;
 }
