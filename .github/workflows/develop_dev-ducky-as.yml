@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write  # Kann man lassen, falls du irgendwann OIDC brauchst
 
 jobs:
   deploy:
@@ -21,7 +22,8 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           tenant-id: ${{ secrets.TENANT_ID }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
+          auth-type: 'service_principal'
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy WebApp
         id: deploy-to-webapp
