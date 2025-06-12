@@ -12,27 +12,31 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-  
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
-  
-      - name: npm ci, build and lint
+
+      - name: Install dependencies and build
         run: |
           npm ci
           npm run build
           npm run lint --if-present
-  
-      - name: Upload project for deployment
+
+      - name: Prepare artifact for deployment
+        run: |
+          # Clean up everything except what Azure needs for build and start
+          mkdir deploy
+          cp -r package.json package-lock.json public next.config.js deploy/
+          cp -r .next deploy/
+        shell: bash
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: |
-            .
-            !.git
-            node_modules/
-            .next/
+          path: deploy
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,6 +50,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: deploy
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -53,5 +58,5 @@ jobs:
         with:
           app-name: 'dev-ducky-as'
           slot-name: 'Production'
-          package: .
+          package: deploy
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75BA8F04F8EA4BD3869E7C92764B2217 }}
