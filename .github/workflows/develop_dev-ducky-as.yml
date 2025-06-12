@@ -2,7 +2,7 @@ name: 'Pipeline-React-Main'
 on:
   push:
     branches:
-      - master
+      - Develop
   workflow_dispatch:
 
 permissions:
