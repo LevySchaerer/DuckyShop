@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { act, useState } from 'react'
 import styles from './dashboard.module.css'
 import sha256 from 'crypto-js/sha256'
 import ducky from '../../public/RubberDucky.jpg'
 import Image from 'next/image'
-
+import { GrAdd } from "react-icons/gr";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import Link from 'next/link'
 
 import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
@@ -140,11 +141,55 @@ const ordersArray = [
   }
 ];
 
+const users = [
+  {
+    UserID: "1",
+    FirstName: "Max",
+    Name: "Imal",
+    Address: "Zürichstrasse 72",
+    PLZ: "3012",
+    City: "Zürich"
+  },
+  {
+    UserID: "2",
+    FirstName: "Anna",
+    Name: "Muster",
+    Address: "Bahnhofstrasse 10",
+    PLZ: "8001",
+    City: "Zürich"
+  },
+  {
+    UserID: "3",
+    FirstName: "Luca",
+    Name: "Schmidt",
+    Address: "Postgasse 5",
+    PLZ: "3000",
+    City: "Bern"
+  },
+  {
+    UserID: "4",
+    FirstName: "Sara",
+    Name: "Meier",
+    Address: "Limmatquai 3",
+    PLZ: "8001",
+    City: "Zürich"
+  },
+  {
+    UserID: "5",
+    FirstName: "Jonas",
+    Name: "Huber",
+    Address: "Hauptstrasse 45",
+    PLZ: "4051",
+    City: "Basel"
+  }
+];
+
 export default function Dashboard() {
-  const [auth, setAuth] = useState(true)
+  const [auth, setAuth] = useState(false)
   const [err, setErr] = useState('')
   const [password, setPassword] = useState('')
   const [selectedTab, setSelectedTab] = useState('Products')
+  const [total, setTotal] = useState(0)
 
   const [orders, setOrders] = useState(ordersArray)
   const [activeOrder, setActiveOrder] = useState(null)
@@ -157,15 +202,19 @@ export default function Dashboard() {
     }
   }
 
-  // Handle drag over event for better visual feedback
   const handleDragOver = (event) => {
     const { over } = event
-    // This helps maintain consistent hover state
   }
   const handleDragStart = (event) => {
     const { active } = event
     const activeOrderData = orders.find(order => order.OrderID === active.id)
     setActiveOrder(activeOrderData)
+
+    const totalRaw = activeOrderData.Products.reduce((sum, product) => {
+      return sum + product.Price * product.Quantity;
+    }, 0);
+
+    setTotal(totalRaw)
   }
 
   const handleDragEnd = (event) => {
@@ -206,14 +255,13 @@ export default function Dashboard() {
         )
       )
     }
-    console.log(orders)
   }
 
   if (!auth) {
     return (
       <div className={styles.loginContainer}>
         <h1>Login</h1>
-        <input onChange={(e) => setPassword(e.target.value)} placeholder='Token' type="password" />
+        <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password" />
         <button onClick={authCheck} className={styles.button}>Submit</button>
         <h4>{err}</h4>
       </div>
@@ -230,6 +278,9 @@ export default function Dashboard() {
       <div className={styles.content}>
         {selectedTab === 'Products' && (
           <div className={styles.products}>
+            <Link href={"/create"} className={styles.addProduct}>
+              <GrAdd size={70} color='#3b82f6'/>
+            </Link>
             {products.map((product, i) => (
               <div key={i} className={styles.product}>
                 <div className={styles.productContent}>
@@ -279,8 +330,16 @@ export default function Dashboard() {
             <DragOverlay>
               {activeOrder ? (
                 <div className={styles.dragOverlay}>
-                  <h3>{activeOrder.OrderID}</h3>
-                  <p>State {activeOrder.State}</p>
+                  <div className={styles.adressInf}>
+                      <p>{users[activeOrder.UserID - 1].Address}</p>
+                      <p>{users[activeOrder.UserID - 1].PLZ}</p>
+                      <p>{users[activeOrder.UserID - 1].City}</p>
+                  </div>
+                  <div className={styles.userInf}>
+                      <p>{users[activeOrder.UserID - 1].FirstName}</p>
+                      <p>{users[activeOrder.UserID - 1].Name}</p>
+                      <h4>{total}</h4>
+                  </div>
                 </div>
               ) : null}
             </DragOverlay>

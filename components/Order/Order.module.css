@@ -1,8 +1,23 @@
 .order {
     display: flex;
+    justify-content: space-between;
     background: #27272780;
-    height: 30px;
-    width: 200px;
-    margin: 5px 0;
+    height: fit-content;
+    width: 350px;
+    margin: 10px 0;
+    border-radius: 8px;
+    padding: 10px;
 }
 
+.adressInf {
+    font-weight: 100;
+}
+
+.userInf {
+    font-weight: 300;
+}
+
+.userInf h4 {
+    padding-top: 8px;
+    border-bottom: 1px solid white;
+}
