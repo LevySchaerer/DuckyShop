@@ -2,12 +2,12 @@ name: 'Pipeline-React-Main'
 on:
   push:
     branches:
-      - Develop
+      - master
   workflow_dispatch:
 
 permissions:
   contents: read
-  id-token: write  # Kann man lassen, falls du irgendwann OIDC brauchst
+  # id-token: write  # auskommentiert, damit gar kein OIDC-Flow mehr startet
 
 jobs:
   deploy:
@@ -16,12 +16,9 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v4
 
-      - name: Azure Login
+      - name: Azure Login (Service Principal)
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.CLIENT_ID }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
           auth-type: 'service_principal'
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
