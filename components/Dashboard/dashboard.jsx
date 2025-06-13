@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
 
-const token = '9d01b00876449148347bf4c01395553173fcaa479db1925b706974c1b06f7126'
+const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
 
 const products = [
   {

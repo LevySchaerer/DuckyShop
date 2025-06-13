@@ -20,7 +20,7 @@
 }
 
 .links li {
-    margin: 0 0.8rem;
+    margin: 0 1.4rem;
 }
 
 .links a {
@@ -53,4 +53,8 @@
         gap: 0.4rem;
     }
     
+}
+
+.cartAmount {
+    margin-right: -20px;
 }
