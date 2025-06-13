@@ -26,6 +26,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: "wa-demoapp-prod-bff3fb24"
+          app-name: "dev-ducky-as"
           slot-name: "Production"
           package: .
