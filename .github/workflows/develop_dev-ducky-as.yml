@@ -20,56 +20,16 @@ jobs:
           node-version: '22.x'
       
       - name: Install dependencies
-        run: |
-          npm ci --omit=dev --no-audit --no-fund
-      
-      - name: Check and fix invalid pages
-        run: |
-          # Check if pages/app exists and is problematic
-          if [ -d "pages/app" ]; then
-            echo "Found pages/app directory - checking for invalid files"
-            # Remove any non-JS/non-TS files in pages directory
-            find pages -type f ! -name "*.js" ! -name "*.jsx" ! -name "*.ts" ! -name "*.tsx" -delete 2>/dev/null || true
-            # Check if pages/app is empty or contains invalid files
-            if [ -z "$(find pages/app -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" 2>/dev/null)" ]; then
-              echo "Removing empty or invalid pages/app directory"
-              rm -rf pages/app
-            fi
-          fi
-          
-          # Also check for any other problematic files in pages
-          find pages -type f -exec grep -L "export default\|module.exports" {} \; 2>/dev/null | head -5 | while read file; do
-            echo "Warning: $file might not have a valid React component export"
-          done
+        run: npm install
       
       - name: Build application
-        run: |
-          npm run build
-      
-      - name: Clean up for deployment
-        run: |
-          # Remove unnecessary files to reduce package size
-          find node_modules -name "*.md" -delete 2>/dev/null || true
-          find node_modules -name "*.txt" -delete 2>/dev/null || true
-          find node_modules -name "CHANGELOG*" -delete 2>/dev/null || true
-          find node_modules -name "README*" -delete 2>/dev/null || true
-          find node_modules -name "*.d.ts" -delete 2>/dev/null || true
-          find node_modules -name "test" -type d -exec rm -rf {} + 2>/dev/null || true
-          find node_modules -name "tests" -type d -exec rm -rf {} + 2>/dev/null || true
-          find node_modules -name "__tests__" -type d -exec rm -rf {} + 2>/dev/null || true
-          find node_modules -name "*.test.js" -delete 2>/dev/null || true
-          find node_modules -name "*.spec.js" -delete 2>/dev/null || true
-          # Remove git and other unnecessary files
-          rm -rf .git .github *.md
+        run: npm run build
       
       - name: Azure Login (Service Principal)
         uses: azure/login@v2
         with:
           auth-type: 'service_principal'
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
-      - name: Wait before deployment
-        run: sleep 30
       
       - name: Deploy WebApp
         id: deploy-to-webapp
