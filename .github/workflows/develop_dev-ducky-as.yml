@@ -19,10 +19,32 @@ jobs:
         with:
           node-version: '22.x'
       
-      - name: Install and build
+      - name: Install dependencies
         run: |
-          npm ci --only=production --no-audit --no-fund
-          npm run build --if-present
+          npm ci --omit=dev --no-audit --no-fund
+      
+      - name: Check and fix invalid pages
+        run: |
+          # Check if pages/app exists and is problematic
+          if [ -d "pages/app" ]; then
+            echo "Found pages/app directory - checking for invalid files"
+            # Remove any non-JS/non-TS files in pages directory
+            find pages -type f ! -name "*.js" ! -name "*.jsx" ! -name "*.ts" ! -name "*.tsx" -delete 2>/dev/null || true
+            # Check if pages/app is empty or contains invalid files
+            if [ -z "$(find pages/app -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" 2>/dev/null)" ]; then
+              echo "Removing empty or invalid pages/app directory"
+              rm -rf pages/app
+            fi
+          fi
+          
+          # Also check for any other problematic files in pages
+          find pages -type f -exec grep -L "export default\|module.exports" {} \; 2>/dev/null | head -5 | while read file; do
+            echo "Warning: $file might not have a valid React component export"
+          done
+      
+      - name: Build application
+        run: |
+          npm run build
       
       - name: Clean up for deployment
         run: |
