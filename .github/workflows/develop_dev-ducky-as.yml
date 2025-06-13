@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  # id-token: write  # auskommentiert, damit gar kein OIDC-Flow mehr startet
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,12 +15,16 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22.x'
+          cache: 'npm'
       
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+      
+      - name: Build React App
+        run: npm run build
       
       - name: Azure Login (Service Principal)
         uses: azure/login@v2
@@ -34,5 +38,5 @@ jobs:
         with:
           app-name: "dev-ducky-as"
           slot-name: "Production"
-          package: .
+          package: ./build  # Oder ./dist je nach React-Setup
         timeout-minutes: 15
