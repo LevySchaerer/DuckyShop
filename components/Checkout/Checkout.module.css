@@ -34,7 +34,23 @@
 }
 
 .CartItems {
-    margin-top: 30px;
+    margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.CartItems::-webkit-scrollbar {
+    display: initial;
+    width: 8px;
+}
+
+.CartItems::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+}
+
+.CartItems::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .cartItem {

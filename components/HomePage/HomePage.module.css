@@ -107,3 +107,108 @@
 .pageSubTitle {
 
 }
+
+.flyingItem {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  left: var(--start-x);
+  top: var(--start-y);
+  transform: translate(-50%, -50%);
+  animation: flyToCart 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.flyingDucky {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+  animation: spin 1s linear infinite, pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes flyToCart {
+  0% {
+    left: var(--start-x);
+    top: var(--start-y);
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 1;
+  }
+  
+  30% {
+    transform: translate(-50%, -50%) scale(2.4) rotate(15deg);
+  }
+  
+  70% {
+    left: calc(var(--end-x) - 100px);
+    top: calc(var(--end-y) + 50px);
+    transform: translate(-50%, -50%) scale(1) rotate(-10deg);
+    opacity: 0.8;
+  }
+  
+  100% {
+    left: var(--end-x);
+    top: var(--end-y);
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cartButton {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cartButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.cartButton:active::before {
+  width: 300%;
+  height: 300%;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.2)) drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 8px 10px rgba(255, 215, 0, 0.2)) drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+  }
+}
+
+.flyingItem::after {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 20px;
+  animation: sparkle 1s ease-in-out infinite;
+}

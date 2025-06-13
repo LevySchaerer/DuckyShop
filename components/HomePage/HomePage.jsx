@@ -37,17 +37,18 @@ const products = [
 
 export default function HomePage() {
     const [index, setIndex] = useState(0);
+    const [flyingItems, setFlyingItems] = useState([]);
 
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
 
     useEffect(() => {
-    const interval = setInterval(() => {
-        next();
-    }, 7000);
+        const interval = setInterval(() => {
+            next();
+        }, 7000);
 
-    return () => clearInterval(interval);
-}, []);
+        return () => clearInterval(interval);
+    }, []);
 
     function calculateSliderDiff(index) {
         const range = (products.length - 1) * 300;
@@ -55,7 +56,8 @@ export default function HomePage() {
         return (middle - index) * (range / middle);
     }
 
-    const addToCart = (product) => {
+    const addToCart = (product, event) => {
+
         const cart = JSON.parse(localStorage.getItem("cart") || "[]");
         const existingProductIndex = cart.findIndex(item => item.id === product.id);
     
@@ -66,6 +68,25 @@ export default function HomePage() {
         }
     
         localStorage.setItem("cart", JSON.stringify(cart));
+
+        const buttonRect = event.target.getBoundingClientRect();
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartRect = cartIcon ? cartIcon.getBoundingClientRect() : { top: 20, right: 20 };
+
+        const flyingItem = {
+            id: Date.now() + Math.random(),
+            product,
+            startX: buttonRect.left + buttonRect.width / 2,
+            startY: buttonRect.top + buttonRect.height / 2,
+            endX: window.innerWidth - 50,
+            endY: 50,
+        };
+
+        setFlyingItems(prev => [...prev, flyingItem]);
+
+        setTimeout(() => {
+            setFlyingItems(prev => prev.filter(item => item.id !== flyingItem.id));
+        }, 1000);
     };
 
     return (
@@ -82,7 +103,11 @@ export default function HomePage() {
                                 <div className={styles.details}>
                                     <h1 className={styles.price}>{product.price} Fr</h1>
                                     <h2 className={styles.name}>{product.name}</h2>
-                                    <button className={styles.cartButton} onClick={() => addToCart(product)}>Add to Cart</button>
+                                    <button 
+                                        className={styles.cartButton} 
+                                        onClick={(e) => addToCart(product, e)}>
+                                        Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -91,6 +116,21 @@ export default function HomePage() {
                     <IoIosArrowForward size={60} onClick={next} className={`${styles.arrow} ${styles.arrowRight}`}/>
                 </div>
             </div>
+
+            {flyingItems.map((item) => (
+                <div
+                    key={item.id}
+                    className={styles.flyingItem}
+                    style={{
+                        '--start-x': `${item.startX}px`,
+                        '--start-y': `${item.startY}px`,
+                        '--end-x': `${item.endX}px`,
+                        '--end-y': `${item.endY}px`,
+                    }}
+                >
+                    <Image src={item.product.image} alt="flying ducky" className={styles.flyingDucky} />
+                </div>
+            ))}
         </div>
     );
 }
