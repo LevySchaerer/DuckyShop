@@ -1,0 +1,57 @@
+name: 'Pipeline-NextJS-Server'
+on:
+  push:
+    branches:
+      - Develop
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build Next.js App
+        run: npm run build
+      
+      - name: Create deployment package
+        run: |
+          # Erstelle deployment Ordner
+          mkdir deployment
+          
+          # Kopiere essenzielle Dateien für Next.js Server
+          cp -r .next deployment/
+          cp -r public deployment/ 2>/dev/null || true
+          cp package*.json deployment/
+          cp next.config.js deployment/ 2>/dev/null || true
+          
+          # Installiere nur Production Dependencies aus originaler package.json
+          cd deployment
+          npm ci --omit=dev
+      
+      - name: Azure Login (Service Principal)
+        uses: azure/login@v2
+        with:
+          auth-type: 'service_principal'
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy WebApp
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: "dev-ducky-as"
+          slot-name: "Production"
+          package: ./deployment
+        timeout-minutes: 15

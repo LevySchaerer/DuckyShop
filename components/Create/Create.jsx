@@ -1,0 +1,88 @@
+import { useState } from "react"
+import sha256 from 'crypto-js/sha256'
+import styles from './Create.module.css'
+import ducky from '../../public/RubberDucky.jpg'
+import ProductAPI from "@/lib/app/Products"
+
+const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
+
+const initialProducts = [
+  {
+    id: 1,
+    name: "Ducky Mr Pop",
+    price: 2.99,
+    image: ducky,
+    stock: 1
+  }
+];
+
+export default function Create() {
+    const [auth, setAuth] = useState(false)
+    const [err, setErr] = useState('')
+    const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [image, setImage] = useState(null)
+    const [valError, setValError] = useState('')
+    const [products, setProducts] = useState(initialProducts)
+
+    const authCheck = () => {
+        if (sha256(password).toString() === token) {
+            setAuth(true)
+        } else {
+            setErr("Wrong Password")
+        }
+    }
+
+    const handleAddProduct = async () => {
+        console.log(name, price, image);
+        if (!name || !price) {
+            setValError("All fields must be filled");
+            return;
+        }
+        setValError("");
+
+        const newProduct = {
+            id: products.length + 1,
+            name,
+            price: parseFloat(price),
+            image,
+            stock: 1
+        };
+
+        try {
+            await ProductAPI.postProduct(newProduct);
+
+            setProducts([...products, newProduct]);
+
+            setName('');
+            setPrice('');
+            setImage(null);
+
+            console.log([...products, newProduct]);
+        } catch (error) {
+            console.error("Fehler beim Hinzufügen des Produkts:", error);
+            setValError("Produkt konnte nicht hinzugefügt werden.");
+        }
+    };
+
+    if (!auth) {
+    return (
+        <div className={styles.loginContainer}>
+            <h1>Login</h1>
+            <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password" />
+            <button onClick={authCheck} className={styles.button}>Submit</button>
+            <h4>{err}</h4>
+        </div>
+    )}
+
+    return (
+        <div className={styles.container}>
+            <input onChange={(e) => setName(e.target.value)} value={name} className={styles.nameInput} type="text" placeholder="Name"/>
+            <input onChange={(e) => setPrice(e.target.value)} value={price} className={styles.priceInput} type="number" placeholder="Price" />
+            <input onChange={(e) => setImage(e.target.files[0])}className={styles.imageInput} type="file" accept="image/*"/>
+            <button onClick={handleAddProduct}>Add Product</button>
+            <h3>{valError}</h3>
+        </div>
+    )
+}

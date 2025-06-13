@@ -1,0 +1,14 @@
+.column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 20px;
+    width: 400px;
+    background: #ffffff27;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.columnOver {
+    border: 3px solid #007bff;
+}

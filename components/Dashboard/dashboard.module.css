@@ -1,0 +1,174 @@
+
+.body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topSelector {
+    position: absolute;
+}
+
+.selectorButton {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+.active {
+    border-bottom: solid 3px #3b82f6;
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.button {
+    background: transparent;
+    border: 2px solid #3b82f6;
+    border-radius: 6px;
+    height: 40px;
+    font-size: 24px;
+    color: #3b82f6;
+    -webkit-text-stroke: 1px #3b82f6;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    color: transparent;
+}
+
+.input {
+    outline: none;
+    border: 2px solid #3b82f6;
+    background: transparent;
+    border-radius: 6px;
+    height: 40px;
+    font-size: 24px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.input:focus {
+
+}
+
+.products {
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    background-color: #223c668a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px;
+    width: 50rem;
+}
+
+.addProduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #3b82f6;
+    padding: 20px;
+    margin: 30px;
+    height: 100px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.addProduct:hover {
+    transform: scale(1.02);
+}
+
+.productContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+.productEdit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.editIcons {
+    cursor: pointer;
+}
+
+.duckyImage {
+    width: 60px;
+    height: auto;
+}
+
+.stages {
+    display: flex;
+    flex-direction: row;
+}
+
+.stage1, .stage2, .stage3 {
+    padding: 0 20px;
+    height: 80vh;
+    width: 400px;
+    border: solid 1px white;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+.stageTitle {
+    color: #3b82f6;
+    margin-top: -30px;
+    padding: 0 10px;
+}
+
+
+
+.orderState1, .orderState2, .orderState3 {
+    margin: 10px 0;
+    background: #3b83f644;
+}
+
+.orderState3 {
+    background: #1eb61062;
+}
+
+.columns {
+    display: flex;
+}
+
+.dragOverlay {
+    display: flex;
+    justify-content: space-between;
+    background: #27272780;
+    height: fit-content;
+    width: 350px;
+    margin: 10px 0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.adressInf {
+    font-weight: 100;
+}
+
+.userInf {
+    font-weight: 300;
+}
+
+.userInf h4 {
+    padding-top: 8px;
+    border-bottom: 1px solid white;
+}
