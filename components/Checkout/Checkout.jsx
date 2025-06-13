@@ -2,10 +2,21 @@ import styles from "./Checkout.module.css"
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaInfo } from "react-icons/fa";
+import sha256 from 'crypto-js/sha256'
 
 const Checkout = () => {
     const [sum, setSum] = useState(0)
     const [cart, setCart] = useState([])
+    const [userToken, setUserToken] = useState("")
+    const [form, setForm] = useState({
+    firstName: "",
+    name: "",
+    mobile: "",
+    address: "",
+    plz: "",
+    village: "",
+    city: ""
+    });
 
     useEffect(() => {
         const cartdata = localStorage.getItem('cart');
@@ -16,6 +27,49 @@ const Checkout = () => {
         setSum(stockSum);
     }, [])
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }));
+    };
+
+    const validateForm = () => {
+        const { firstName, name, mobile, address, plz, city } = form;
+        if (!firstName || !name || !mobile || !address || !plz || !city) {
+            return false;
+        }
+
+        const phoneRegex = /^\+?\d{7,15}$/;
+        if (!phoneRegex.test(mobile)) {
+            return false;
+        }
+
+        const plzRegex = /^\d{4,6}$/;
+        if (!plzRegex.test(plz)) {
+            return false;
+        }
+        setUserToken(sha256(mobile).toString())
+
+        return true;
+    };
+
+
+    const handleSubmit = () => {
+        if (!validateForm()) return;
+
+        const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
+        window.open(url, '_blank')
+
+        const order = {
+            userToken: userToken,
+            firstName: form.firstName,
+            name: form.name,
+            mobile: form.mobile,
+            address: form.address,
+            plz: form.plz,
+            city: form.city
+        }
+    }
+
     return (
         <div className={styles.body}>
             <div className={styles.checkoutContainer}>
@@ -24,17 +78,19 @@ const Checkout = () => {
                     <h2 className={styles.sectionTitle}>Delivery</h2>
 
                     <h3 className={styles.CheckoutInputTitel}>First Name</h3>
-                    <input className={styles.CheckoutInput} placeholder="Saul" type="text" />
+                    <input className={styles.CheckoutInput} placeholder="Saul" type="text" name="firstName" value={form.firstName} onChange={handleChange} />
                     <h3 className={styles.CheckoutInputTitel}>Name</h3>
-                    <input className={styles.CheckoutInput} placeholder="Goodman" type="text" />
+                    <input className={styles.CheckoutInput} placeholder="Goodman" type="text" name="name" value={form.name} onChange={handleChange}/>
                     <h3 className={styles.CheckoutInputTitel}>Mobile</h3>
-                    <input className={styles.CheckoutInput} placeholder="+41 77 483 97 83" type="text" />
+                    <input className={styles.CheckoutInput} placeholder="+41 77 483 97 83" type="text" name="mobile" value={form.mobile} onChange={handleChange}/>
                     <h3 className={styles.CheckoutInputTitel}>Adress</h3>
-                    <input className={styles.CheckoutInput} placeholder="Broadway 63" type="text" />
+                    <input className={styles.CheckoutInput} placeholder="Broadway 63" type="text" name="address" value={form.address} onChange={handleChange}/>
                     <h3 className={styles.CheckoutInputTitel}>PLZ</h3>
-                    <input className={styles.CheckoutInput} placeholder="Tarrytown 10591" type="text" />
-                    <h3 className={styles.CheckoutInputTitel}>Ciry</h3>
-                    <input className={styles.CheckoutInput} placeholder="New York" type="text" />
+                    <input className={styles.CheckoutInput} placeholder="10591" type="text" name="plz" value={form.plz} onChange={handleChange}/>
+                    <h3 className={styles.CheckoutInputTitel}>Village</h3>
+                    <input className={styles.CheckoutInput} placeholder="Tarrytown" type="text" name="village" value={form.village} onChange={handleChange}/>
+                    <h3 className={styles.CheckoutInputTitel}>City</h3>
+                    <input className={styles.CheckoutInput} placeholder="New York" type="text" name="city" value={form.city} onChange={handleChange}/>
                 </div>
                 <div className={styles.rightSection}>
                     <h2 className={styles.sectionTitle}>Payment</h2>
@@ -60,7 +116,7 @@ const Checkout = () => {
                     
                     <div className={styles.paymentSection}>
                         <p className={styles.paymentInfo}><FaInfo className={styles.infoIcon}/>Please do not change the amount in the App, otherwise the order cannot be delivered.</p>
-                        <button className={styles.twintButton} onClick={() => window.open(`https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}`, '_blank')}>
+                        <button className={styles.twintButton} onClick={handleSubmit}>
                             <img className={styles.twintImage} alt="Embedded TWINT button" src="https://go.twint.ch/static/img/button_dark_en.svg"/>
                         </button>
                     </div>
