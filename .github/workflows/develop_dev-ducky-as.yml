@@ -1,4 +1,4 @@
-name: 'Pipeline-NextJS-Main'
+name: 'Pipeline-NextJS-Server'
 on:
   push:
     branches:
@@ -23,9 +23,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build and Export Next.js App
+      - name: Build Next.js App
+        run: npm run build
+      
+      - name: Create deployment package
         run: |
-          npm run build
+          # Erstelle deployment Ordner
+          mkdir deployment
+          
+          # Kopiere essenzielle Dateien für Next.js Server
+          cp -r .next deployment/
+          cp -r public deployment/ 2>/dev/null || true
+          cp package*.json deployment/
+          cp next.config.js deployment/ 2>/dev/null || true
+          
+          # Erstelle minimale package.json für Production
+          cd deployment
+          cat > package.json << 'EOF'
+          {
+            "name": "nextjs-app",
+            "version": "1.0.0",
+            "scripts": {
+              "start": "next start"
+            },
+            "dependencies": {
+              "next": "^15.3.3",
+              "react": "^18.0.0",
+              "react-dom": "^18.0.0"
+            }
+          }
+          EOF
+          
+          # Installiere nur Production Dependencies
+          npm install --production
       
       - name: Azure Login (Service Principal)
         uses: azure/login@v2
@@ -39,5 +69,5 @@ jobs:
         with:
           app-name: "dev-ducky-as"
           slot-name: "Production"
-          package: ./out  # Next.js export erstellt ./out Verzeichnis
+          package: ./deployment
         timeout-minutes: 15

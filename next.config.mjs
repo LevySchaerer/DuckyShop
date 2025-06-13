@@ -2,15 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   
-  // Für statischen Export zu Azure App Service
-  output: 'export',
+  // ENTFERNT: output: 'export' - da Sie Server Functions brauchen
+  // ENTFERNT: images.unoptimized - da Server-Side
   
-  // Trailing Slash für bessere Kompatibilität mit Azure
-  trailingSlash: true,
-  
-  // Bilder für statischen Export deaktivieren
-  images: {
-    unoptimized: true
+  // Für Azure App Service optimiert
+  experimental: {
+    outputFileTracingRoot: undefined, // Für bessere Deployment-Kompatibilität
   }
 };
 
