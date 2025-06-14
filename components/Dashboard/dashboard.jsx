@@ -170,7 +170,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getProducts = async () => {
-      const data = await ProductAPI.getProduct();
+      const data = await ProductAPI.getProducts();
       setProducts(data)
     };
 

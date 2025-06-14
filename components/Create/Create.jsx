@@ -81,7 +81,7 @@ export default function Create() {
           <h1>Create a Ducky</h1>
             <input onChange={(e) => setName(e.target.value)} value={name} className={styles.input} type="text" placeholder="Name"/>
             <input onChange={(e) => setPrice(e.target.value)} value={price} className={styles.input} type="number" placeholder="Price" />
-            <input onChange={(e) => setImage(e.target.files[0])}className={styles.imageInput} type="file" accept="image/*"/>
+            <input onChange={(e) => setImage(e.target.files[0])} className={styles.imageInput} type="file" accept="image/*"/>
             <button className={styles.button} onClick={handleAddProduct}>Add Product</button>
             <h3>{valError}</h3>
         </div>
