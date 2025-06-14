@@ -161,6 +161,7 @@ export default function Dashboard() {
   const [password, setPassword] = useState('')
   const [selectedTab, setSelectedTab] = useState('Products')
   const [total, setTotal] = useState(0)
+  const [updateProducts, setUpdateProducts] = useState(false)
 
   const [products, setProducts] = useState()
 
@@ -174,7 +175,8 @@ export default function Dashboard() {
     };
 
     getProducts();
-  }, []);
+    setUpdateProducts(false)
+  }, [updateProducts]);
 
   const authCheck = () => {
     if (sha256(password).toString() === token) {
@@ -229,14 +231,23 @@ export default function Dashboard() {
     }
 
     if (activeOrder.State !== newState) {
-      setOrders(prevOrders => 
-        prevOrders.map(order => 
-          order.OrderID === activeOrderId 
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.OrderID === activeOrderId
             ? { ...order, State: newState }
             : order
         )
       )
     }
+  }
+
+  const handleDelete = async (id) => {
+    await ProductAPI.deleteProduct(id);
+    setUpdateProducts(true);
+  }
+
+  const handleEdit = () => {
+
   }
 
   if (!auth) {
@@ -261,7 +272,7 @@ export default function Dashboard() {
         {selectedTab === 'Products' && (
           <div className={styles.products}>
             <Link href={"/create"} className={styles.addProduct}>
-              <GrAdd size={70} color='#3b82f6'/>
+              <GrAdd size={70} color='#3b82f6' />
             </Link>
             {products.map((product, i) => {
               const image = product.Image;
@@ -278,7 +289,7 @@ export default function Dashboard() {
                   </div>
                   <div className={styles.productEdit}>
                     <FaRegEdit className={styles.editIcons} size={20} />
-                    <FaRegTrashCan className={styles.editIcons} color='#b81d1d' size={20} />
+                    <FaRegTrashCan onClick={() => handleDelete(product.ProductID)} className={styles.editIcons} color='#b81d1d' size={20} />
                   </div>
                 </div>
               )
@@ -288,28 +299,28 @@ export default function Dashboard() {
           </div>
         )}
         {selectedTab === 'Orders' && (
-          <DndContext 
-            collisionDetection={closestCorners} 
+          <DndContext
+            collisionDetection={closestCorners}
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
             <div className={styles.columns}>
-              <Column 
+              <Column
                 id="payment-column"
-                orders={orders.filter(order => order.State === 'P')} 
+                orders={orders.filter(order => order.State === 'P')}
                 title={"Payment"}
                 state="P"
               />
-              <Column 
+              <Column
                 id="delivery-column"
-                orders={orders.filter(order => order.State === 'D')} 
+                orders={orders.filter(order => order.State === 'D')}
                 title={"Delivery"}
                 state="D"
               />
-              <Column 
+              <Column
                 id="completed-column"
-                orders={orders.filter(order => order.State === 'C')} 
+                orders={orders.filter(order => order.State === 'C')}
                 title={"Completed"}
                 state="C"
               />
@@ -318,14 +329,14 @@ export default function Dashboard() {
               {activeOrder ? (
                 <div className={styles.dragOverlay}>
                   <div className={styles.adressInf}>
-                      <p>{users[activeOrder.UserID - 1].Address}</p>
-                      <p>{users[activeOrder.UserID - 1].PLZ}</p>
-                      <p>{users[activeOrder.UserID - 1].City}</p>
+                    <p>{users[activeOrder.UserID - 1].Address}</p>
+                    <p>{users[activeOrder.UserID - 1].PLZ}</p>
+                    <p>{users[activeOrder.UserID - 1].City}</p>
                   </div>
                   <div className={styles.userInf}>
-                      <p>{users[activeOrder.UserID - 1].FirstName}</p>
-                      <p>{users[activeOrder.UserID - 1].Name}</p>
-                      <h4>{total}</h4>
+                    <p>{users[activeOrder.UserID - 1].FirstName}</p>
+                    <p>{users[activeOrder.UserID - 1].Name}</p>
+                    <h4>{total}</h4>
                   </div>
                 </div>
               ) : null}
