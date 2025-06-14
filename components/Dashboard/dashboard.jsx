@@ -1,4 +1,4 @@
-import { act, useState } from 'react'
+import { act, useEffect, useState } from 'react'
 import styles from './dashboard.module.css'
 import sha256 from 'crypto-js/sha256'
 import ducky from '../../public/RubberDucky.jpg'
@@ -8,41 +8,12 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from 'next/link'
 
+import ProductAPI from "@/lib/app/Products"
+
 import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
 
 const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
-
-const products = [
-  {
-    id: 1,
-    name: "Ducky Mr Pop",
-    price: 2.99,
-    image: ducky,
-    stock: 1
-  },
-  {
-    id: 2,
-    name: "Ducky Dr Max",
-    price: 2.99,
-    image: ducky,
-    stock: 1
-  },
-  {
-    id: 3,
-    name: "Ducky Mrs Pop",
-    price: 2.99,
-    image: ducky,
-    stock: 1
-  },
-  {
-    id: 4,
-    name: "Mrs Pop",
-    price: 2.99,
-    image: ducky,
-    stock: 1
-  }
-];
 
 const ordersArray = [
   {
@@ -191,8 +162,19 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('Products')
   const [total, setTotal] = useState(0)
 
+  const [products, setProducts] = useState()
+
   const [orders, setOrders] = useState(ordersArray)
   const [activeOrder, setActiveOrder] = useState(null)
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const data = await ProductAPI.getProduct();
+      setProducts(data)
+    };
+
+    getProducts();
+  }, []);
 
   const authCheck = () => {
     if (sha256(password).toString() === token) {
@@ -281,21 +263,26 @@ export default function Dashboard() {
             <Link href={"/create"} className={styles.addProduct}>
               <GrAdd size={70} color='#3b82f6'/>
             </Link>
-            {products.map((product, i) => (
-              <div key={i} className={styles.product}>
-                <div className={styles.productContent}>
-                  <div><Image src={product.image} className={styles.duckyImage} alt={product.name} /></div>
-                  <div>
-                    <h3>{product.name}</h3>
-                    <h3>{product.price}</h3>
+            {products.map((product, i) => {
+              const image = product.Image;
+              console.log(i, ". ImageSrc: ", image)
+
+              return (
+                <div key={i} className={styles.product}>
+                  <div className={styles.productContent}>
+                    <div><img src={image} className={styles.duckyImage} alt={product.Name} /></div>
+                    <div>
+                      <h3>{product.Name}</h3>
+                      <h3>{product.Price}</h3>
+                    </div>
+                  </div>
+                  <div className={styles.productEdit}>
+                    <FaRegEdit className={styles.editIcons} size={20} />
+                    <FaRegTrashCan className={styles.editIcons} color='#b81d1d' size={20} />
                   </div>
                 </div>
-                <div className={styles.productEdit}>
-                  <FaRegEdit className={styles.editIcons} size={20} />
-                  <FaRegTrashCan className={styles.editIcons} color='#b81d1d' size={20} />
-                </div>
-              </div>
-            ))
+              )
+            })
 
             }
           </div>

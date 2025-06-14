@@ -35,35 +35,34 @@ export default function Create() {
     }
 
     const handleAddProduct = async () => {
-        console.log(name, price, image);
-        if (!name || !price) {
-            setValError("All fields must be filled");
-            return;
-        }
-        setValError("");
+      if (!name || !price || !image) {
+        setValError("All fields must be filled");
+        return;
+      }
+      setValError("");
+
+      const fileToBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+
+      try {
+        const base64Image = await fileToBase64(image);
 
         const newProduct = {
-            id: products.length + 1,
-            name,
-            price: parseFloat(price),
-            image,
-            stock: 1
+          Name: name,
+          Price: price,
+          Image: base64Image,
+          Stock: 1
         };
 
-        try {
-            await ProductAPI.postProduct(newProduct);
-
-            setProducts([...products, newProduct]);
-
-            setName('');
-            setPrice('');
-            setImage(null);
-
-            console.log([...products, newProduct]);
-        } catch (error) {
-            console.error("Fehler beim Hinzufügen des Produkts:", error);
-            setValError("Produkt konnte nicht hinzugefügt werden.");
-        }
+        await ProductAPI.postProduct(newProduct);
+      } catch (error) {
+        console.error("Fehler beim Hinzufügen des Produkts:", error);
+        setValError("Produkt konnte nicht hinzugefügt werden.");
+      }
     };
 
     if (!auth) {
