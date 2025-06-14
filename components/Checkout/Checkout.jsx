@@ -35,16 +35,19 @@ const Checkout = () => {
     const validateForm = () => {
         const { firstName, name, mobile, address, plz, city } = form;
         if (!firstName || !name || !mobile || !address || !plz || !city) {
+            console.log("1")
             return false;
         }
 
         const phoneRegex = /^\+?\d{7,15}$/;
         if (!phoneRegex.test(mobile)) {
+            console.log("2")
             return false;
         }
 
         const plzRegex = /^\d{4,6}$/;
         if (!plzRegex.test(plz)) {
+            console.log("3")
             return false;
         }
         setUserToken(sha256(mobile).toString())
