@@ -59,6 +59,7 @@ export default function Create() {
         };
 
         await ProductAPI.postProduct(newProduct);
+        window.location.href = '/dashboard';
       } catch (error) {
         console.error("Fehler beim Hinzufügen des Produkts:", error);
         setValError("Produkt konnte nicht hinzugefügt werden.");
@@ -77,10 +78,11 @@ export default function Create() {
 
     return (
         <div className={styles.container}>
-            <input onChange={(e) => setName(e.target.value)} value={name} className={styles.nameInput} type="text" placeholder="Name"/>
-            <input onChange={(e) => setPrice(e.target.value)} value={price} className={styles.priceInput} type="number" placeholder="Price" />
+          <h1>Create a Ducky</h1>
+            <input onChange={(e) => setName(e.target.value)} value={name} className={styles.input} type="text" placeholder="Name"/>
+            <input onChange={(e) => setPrice(e.target.value)} value={price} className={styles.input} type="number" placeholder="Price" />
             <input onChange={(e) => setImage(e.target.files[0])}className={styles.imageInput} type="file" accept="image/*"/>
-            <button onClick={handleAddProduct}>Add Product</button>
+            <button className={styles.button} onClick={handleAddProduct}>Add Product</button>
             <h3>{valError}</h3>
         </div>
     )
