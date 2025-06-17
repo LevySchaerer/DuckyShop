@@ -38,6 +38,6 @@ jobs:
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: "dev-ducky-as"
+          app-name: "WebAppTest-AS"
           slot-name: "Production"
           package: .
