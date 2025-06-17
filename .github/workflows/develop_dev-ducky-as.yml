@@ -17,20 +17,25 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v4
 
-      - name: Azure Login
-        uses: azure/login@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4BF013AED0674B88EA9E5C66E0DCC63D3 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3CF5F5FD5F61400E9CCD051C3BE26FF9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C14381A0A4314481B22FB2ECA7C705F8 }}
+          node-version: '20'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Dependencies
+        run: npm install
 
       - name: Build React App
         run: npm run build
 
-      - name: Deploy WebApp
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: "dev-ducky-as"
