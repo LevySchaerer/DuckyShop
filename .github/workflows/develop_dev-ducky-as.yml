@@ -14,13 +14,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Code Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 18
 
       - name: Install Dependencies
         run: npm install
@@ -35,7 +35,7 @@ jobs:
           tenant-id: ${{ secrets.TENANT_ID }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
         with:
           app-name: "dev-ducky-as"
