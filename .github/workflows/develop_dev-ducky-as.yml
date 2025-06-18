@@ -29,34 +29,41 @@ jobs:
       - name: Prepare Deployment Package
         run: |
           mkdir -p deployment
-          # Kopiere standalone files falls vorhanden
+          
+          # Check if standalone mode is enabled
           if [ -d ".next/standalone" ]; then
+            echo "Using standalone mode deployment"
+            # Copy all standalone files
             cp -r .next/standalone/* deployment/
+            # Create .next directory and copy static files
+            mkdir -p deployment/.next
+            if [ -d ".next/static" ]; then
+              cp -r .next/static deployment/.next/static
+            fi
+            # Copy public directory if it exists and wasn't copied by standalone
+            if [ -d "public" ] && [ ! -d "deployment/public" ]; then
+              cp -r public deployment/public
+            fi
+          else
+            echo "Using regular deployment (standalone not configured)"
+            # Fallback for non-standalone builds
+            cp -r .next deployment/.next
+            cp -r public deployment/public 2>/dev/null || true
+            cp package*.json deployment/
+            # Install production dependencies
+            cd deployment && npm ci --only=production
+            cd ..
           fi
-          # Erstelle .next Ordner im deployment Verzeichnis
-          mkdir -p deployment/.next
-          # Kopiere static files
-          if [ -d ".next/static" ]; then
-            cp -r .next/static deployment/.next/static
+          
+          # Debug: Show deployment structure
+          echo "=== Deployment structure ==="
+          find deployment -type f -name "*.js" | head -10
+          echo "=== Package.json content ==="
+          if [ -f "deployment/package.json" ]; then
+            cat deployment/package.json
           fi
-          # Kopiere public files falls vorhanden
-          if [ -d "public" ]; then
-            cp -r public deployment/public
-          fi
-          # Kopiere config files
-          if [ -f "next.config.mjs" ]; then
-            cp next.config.mjs deployment/
-          fi
-          if [ -f "next.config.js" ]; then
-            cp next.config.js deployment/
-          fi
-          cp package.json deployment/
-          # Debug: Zeige Struktur
-          echo "Deployment structure:"
-          ls -la deployment/
-          if [ -d "deployment/.next" ]; then
-            ls -la deployment/.next/
-          fi
+          echo "=== Server files ==="
+          ls -la deployment/ | grep -E "(server|start)"
       
       - name: Azure Login
         uses: azure/login@v2
