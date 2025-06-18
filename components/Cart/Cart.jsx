@@ -19,7 +19,7 @@ const Cart = ({ isOpen, onClose }) => {
         const cartjson = cartdata ? JSON.parse(cartdata) : [];
         setCart(cartjson)
         console.log(cartjson)
-        const stockSum = cartjson.reduce((sum, product) => sum + (product.stock * product.price), 0)
+        const stockSum = cartjson.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
         setSum(stockSum);
     }, [isOpen])
     
@@ -42,20 +42,20 @@ const Cart = ({ isOpen, onClose }) => {
     const updateCart = (newCart) => {
         setCart(newCart)
         localStorage.setItem('cart', JSON.stringify(newCart));
-        const stockSum = newCart.reduce((sum, product) => sum + (product.stock * product.price), 0)
+        const stockSum = newCart.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
         setSum(stockSum);
     }
 
     const increaseStock = (index) => {
         const newCart = [...cart]
-        newCart[index].stock += 1;
+        newCart[index].Stock += 1;
         updateCart(newCart)
     }
 
     const decreaseStock = (index) => {
         const newCart = [...cart];
-        if (newCart[index].stock > 1) {
-            newCart[index].stock -= 1;
+        if (newCart[index].Stock > 1) {
+            newCart[index].Stock -= 1;
         } else {
             newCart.splice(index, 1)
         }
@@ -79,17 +79,17 @@ const Cart = ({ isOpen, onClose }) => {
                                 return (
                                     <div key={i} className={styles.cartItem}>
                                         <div className={styles.leftSection}>
-                                            <Image src={product.image} alt="ducky" className={styles.ducky} />
+                                            <img src={product.Image} alt="ducky" className={styles.ducky} />
                                             <div className={styles.leftDetails}>
-                                                <h5 className={styles.name}>{product.name}</h5>
+                                                <h5 className={styles.name}>{product.Name}</h5>
                                                 <div className={styles.stockDisplay}>
                                                     <CiCircleMinus size={23} onClick={() => decreaseStock(i)}/>
-                                                    <h4 className={styles.stock}>{product.stock}</h4>
+                                                    <h4 className={styles.stock}>{product.Stock}</h4>
                                                     <CiCirclePlus size={23} onClick={() => increaseStock(i)}/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <h4 className={styles.price}>{product.price} Fr</h4>
+                                        <h4 className={styles.price}>{product.Price} Fr</h4>
                                     </div>
                                 )
                             })}
