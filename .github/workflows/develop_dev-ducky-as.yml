@@ -51,16 +51,19 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip next.zip
 
-      - name: Azure Login via OIDC (auto-detected)
+      - name: Azure Login using Service Principal
         uses: azure/login@v2
         with:
+          auth-type: service-principal
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'WebbAppTest'
+          app-name: 'WebAppTest'
           slot-name: 'Production'
           package: .
