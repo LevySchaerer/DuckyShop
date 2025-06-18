@@ -3,8 +3,12 @@ name: Build and deploy Node.js app to Azure Web App - nextapp25
 on:
   push:
     branches:
-      - Develop
+      - main
   workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -50,16 +54,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip -o next.zip
 
-      - name: Azure Login with Service Principal
+      - name: Azure Login with OIDC
         uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.CLIENT_ID }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'WebAppTest'    # Ändere das auf deinen Web App Namen
-          slot-name: 'Production'  # Oder der Slot, den du nutzt
-          package: '.'             # Deploye das entpackte Verzeichnis
+          app-name: 'nextapp25'
+          slot-name: 'Production'
+          package: '.'
