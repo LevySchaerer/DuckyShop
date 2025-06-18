@@ -13,6 +13,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -20,13 +21,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build React App
+      - name: Build Next.js App
         run: npm run build
+
+      - name: Prepare Deployment Package
+        run: |
+          mkdir deployment
+          cp -r .next/standalone/* deployment/
+          cp -r .next/static deployment/.next/static
+          cp -r public deployment/public
+          cp next.config.mjs deployment/
+          cp package.json deployment/
 
       - name: Azure Login
         uses: azure/login@v2
@@ -39,5 +49,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: "WebAppTest-AS"
-          slot-name: "Production"
-          package: .
+          slot-name: Production
+          package: ./deployment
