@@ -3,6 +3,7 @@ import styles from './HomePage.module.css'
 import ducky from '../../public/RubberDucky.jpg'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState, useEffect } from "react";
+import { TbShoppingCartPlus } from "react-icons/tb";
 
 const products = [
     {
@@ -102,10 +103,11 @@ export default function HomePage() {
                                 <Image src={product.image} alt="ducky" className={styles.ducky} />
                                 <div className={styles.details}>
                                     <h1 className={styles.price}>{product.price} Fr</h1>
-                                    <h2 className={styles.name}>{product.name}</h2>
+                                    <h1 className={styles.name}>{product.name}</h1>
                                     <button 
                                         className={styles.cartButton} 
                                         onClick={(e) => addToCart(product, e)}>
+                                        <TbShoppingCartPlus size={32}/>
                                         Add to Cart
                                     </button>
                                 </div>
