@@ -1,50 +1,70 @@
 name: 'Pipeline-React-Main'
-
 on:
   push:
     branches:
       - Develop
   workflow_dispatch:
-
 permissions:
   id-token: write
   contents: read
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
+          cache: 'npm'
+      
       - name: Install Dependencies
         run: npm install
-
+      
       - name: Build Next.js App
         run: npm run build
-
+      
       - name: Prepare Deployment Package
         run: |
-          mkdir deployment
-          cp -r .next/standalone/* deployment/
-          cp -r .next/static deployment/.next/static
-          cp -r public deployment/public
-          cp next.config.mjs deployment/
+          mkdir -p deployment
+          # Kopiere standalone files falls vorhanden
+          if [ -d ".next/standalone" ]; then
+            cp -r .next/standalone/* deployment/
+          fi
+          # Erstelle .next Ordner im deployment Verzeichnis
+          mkdir -p deployment/.next
+          # Kopiere static files
+          if [ -d ".next/static" ]; then
+            cp -r .next/static deployment/.next/static
+          fi
+          # Kopiere public files falls vorhanden
+          if [ -d "public" ]; then
+            cp -r public deployment/public
+          fi
+          # Kopiere config files
+          if [ -f "next.config.mjs" ]; then
+            cp next.config.mjs deployment/
+          fi
+          if [ -f "next.config.js" ]; then
+            cp next.config.js deployment/
+          fi
           cp package.json deployment/
-
+          # Debug: Zeige Struktur
+          echo "Deployment structure:"
+          ls -la deployment/
+          if [ -d "deployment/.next" ]; then
+            ls -la deployment/.next/
+          fi
+      
       - name: Azure Login
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.CLIENT_ID }}
           tenant-id: ${{ secrets.TENANT_ID }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-
+      
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v3
         with:
