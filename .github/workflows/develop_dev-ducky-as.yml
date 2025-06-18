@@ -6,10 +6,6 @@ on:
       - Develop
   workflow_dispatch:
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +27,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: zip -r next.zip . .next
+        run: zip next.zip ./* .next -qr
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -44,6 +40,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -52,14 +49,19 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip -o next.zip
+        run: unzip next.zip
 
-      - name: Azure Login with OIDC
+      - name: Azure Login via OIDC
         uses: azure/login@v2
+        with:
+          auth-type: oidc
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'WebAppTest'
           slot-name: 'Production'
-          package: '.'
+          package: .
