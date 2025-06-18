@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './ProductEdit.module.css'
+import ProductAPI from '@/lib/app/Products';
 
 
 export default function ProductEdit({productProps}) {
@@ -7,32 +8,37 @@ export default function ProductEdit({productProps}) {
     const [price, setPrice] = useState(product.Price)
     const [name, setName] = useState(product.Name)
     const [stock, setStock] = useState(product.Stock)
-    const [image, setImage] = useState(product.Image)
+    const [image, setImage] = useState()
     const [valError, setValError] = useState('')
 
     const handleSave = async () => {
-        if (!name || !price) {
+        if (!name || !price || !stock) {
             setValError("All fields must be filled");
             return;
         }
 
         const fileToBase64 = (file) => new Promise((resolve, reject) => {
+            console.log(file)
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);
             reader.onerror = error => reject(error);
         });
-
-        setImage(await fileToBase64(image))
+        
+        if (image) {
+            base64Image = await fileToBase64(image);
+            setImage(base64Image);
+        }
 
         const newProduct = {
             Name: name,
             Price: price,
             Stock: stock,
-            Image: image
+            ...(image && { Image: image })
         }
 
-        console.log(newProduct)
+        ProductAPI.updateProduct(newProduct, product.ProductID)
+        window.location.href = '/dashboard'
     }
 
     return ( 
