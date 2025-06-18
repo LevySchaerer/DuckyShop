@@ -51,14 +51,14 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip next.zip
 
-      - name: Azure Login using Service Principal
+      - name: Azure Login
         uses: azure/login@v2
         with:
-          auth-type: service-principal
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          auth-type: SERVICE_PRINCIPAL
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          environment: azurecloud
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
