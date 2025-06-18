@@ -1,4 +1,5 @@
 name: Build and deploy Node.js app to Azure Web App - nextapp25
+
 on:
   push:
     branches:
@@ -11,6 +12,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
       - uses: actions/checkout@v4
       
