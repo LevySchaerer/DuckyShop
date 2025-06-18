@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - nextapp25
 on:
   push:
     branches:
-      - Develop
+      - main
   workflow_dispatch:
 
 jobs:
@@ -54,16 +54,12 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          auth-type: SERVICE_PRINCIPAL
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          environment: azurecloud
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'WebAppTest'
+          app-name: 'nextapp25'
           slot-name: 'Production'
           package: .
