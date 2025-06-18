@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaInfo } from "react-icons/fa";
 import sha256 from 'crypto-js/sha256'
+import OrdersAPI from "@/lib/app/Orders";
 
 const Checkout = () => {
     const [sum, setSum] = useState(0)
@@ -32,8 +33,8 @@ const Checkout = () => {
     };
 
     const validateForm = () => {
-        const { firstName, name, mobile, address, plz, city } = form;
-        if (!firstName || !name || !mobile || !address || !plz || !city) {
+        const { firstName, name, mobile, address, plz, city, village } = form;
+        if (!firstName || !name || !mobile || !address || !plz || !city || !village) {
             console.log("1")
             return;
         }
@@ -56,19 +57,25 @@ const Checkout = () => {
 
     const handleSubmit = (userToken) => {
 
-        console.log(userToken)
         const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
         window.open(url, '_blank')
-
+        
         const order = {
             userToken: userToken,
-            firstName: form.firstName,
-            name: form.name,
+            FirstName: form.firstName,
+            Name: form.name,
             mobile: form.mobile,
-            address: form.address,
-            plz: form.plz,
-            city: form.city
+            Address: form.address,
+            Village: form.village,
+            PLZ: form.plz,
+            City: form.city,
+            orderPrice: sum,
+            Products: [28, 30]
         }
+
+        OrdersAPI.postOrder(order);
+        window.location.href = "/"
+        localStorage.setItem("cart", "[]")
     }
 
     return (
