@@ -7,7 +7,6 @@ import sha256 from 'crypto-js/sha256'
 const Checkout = () => {
     const [sum, setSum] = useState(0)
     const [cart, setCart] = useState([])
-    const [userToken, setUserToken] = useState("")
     const [form, setForm] = useState({
     firstName: "",
     name: "",
@@ -36,29 +35,28 @@ const Checkout = () => {
         const { firstName, name, mobile, address, plz, city } = form;
         if (!firstName || !name || !mobile || !address || !plz || !city) {
             console.log("1")
-            return false;
+            return;
         }
 
         const phoneRegex = /^\+?\d{7,15}$/;
         if (!phoneRegex.test(mobile)) {
             console.log("2")
-            return false;
+            return;
         }
 
         const plzRegex = /^\d{4,6}$/;
         if (!plzRegex.test(plz)) {
             console.log("3")
-            return false;
+            return;
         }
-        setUserToken(sha256(mobile).toString())
 
-        return true;
+        handleSubmit(sha256(mobile).toString());
     };
 
 
-    const handleSubmit = () => {
-        if (!validateForm()) return;
+    const handleSubmit = (userToken) => {
 
+        console.log(userToken)
         const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
         window.open(url, '_blank')
 
@@ -119,7 +117,7 @@ const Checkout = () => {
                     
                     <div className={styles.paymentSection}>
                         <p className={styles.paymentInfo}><FaInfo className={styles.infoIcon}/>Please do not change the amount in the App, otherwise the order cannot be delivered.</p>
-                        <button className={styles.twintButton} onClick={handleSubmit}>
+                        <button className={styles.twintButton} onClick={validateForm}>
                             <img className={styles.twintImage} alt="Embedded TWINT button" src="https://go.twint.ch/static/img/button_dark_en.svg"/>
                         </button>
                     </div>
