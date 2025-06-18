@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - nextapp25
 on:
   push:
     branches:
-      - Develop
+      - main
   workflow_dispatch:
 
 jobs:
@@ -51,10 +51,9 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip next.zip
 
-      - name: Azure Login via OIDC
+      - name: Azure Login via OIDC (auto-detected)
         uses: azure/login@v2
         with:
-          auth-type: oidc
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
@@ -62,6 +61,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'WebAppTest'
+          app-name: 'nextapp25'
           slot-name: 'Production'
           package: .
