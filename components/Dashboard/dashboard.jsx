@@ -246,8 +246,8 @@ export default function Dashboard() {
     setUpdateProducts(true);
   }
 
-  const handleEdit = () => {
-
+  const handleEdit = (id) => {
+    window.location.href = `/edit/${id}`;
   }
 
   if (!auth) {
@@ -288,7 +288,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className={styles.productEdit}>
-                    <FaRegEdit className={styles.editIcons} size={20} />
+                    <FaRegEdit onClick={() => handleEdit(product.ProductID)} className={styles.editIcons} size={20} />
                     <FaRegTrashCan onClick={() => handleDelete(product.ProductID)} className={styles.editIcons} color='#b81d1d' size={20} />
                   </div>
                 </div>
