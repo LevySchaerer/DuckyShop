@@ -27,39 +27,45 @@
 
 .loginContainer {
     display: flex;
+    row-gap: 20px;
     flex-direction: column;
     width: 300px;
 }
 
 .button {
-    background: transparent;
-    border: 2px solid #3b82f6;
+    background: #3b82f6;
+    height: 44px;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
     border-radius: 6px;
-    height: 40px;
-    font-size: 24px;
-    color: #3b82f6;
-    -webkit-text-stroke: 1px #3b82f6;
-    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid #3b82f6;
     transition: all 0.3s ease;
 }
 
 .button:hover {
-    color: transparent;
+    color: #3b82f6;
+    background: transparent;
+    border: 2px solid #3b82f6;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
 
 .input {
     outline: none;
-    border: 2px solid #3b82f6;
+    border: 2px solid #3c3e41;
     background: transparent;
-    border-radius: 6px;
     height: 40px;
-    font-size: 24px;
-    margin: 10px 0;
+    font-size: 14px;
     padding: 10px;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
 }
 
 .input:focus {
-
+    border: #2563eb solid 3px;
+    box-shadow: 0px 0px 18px -9px rgba(59,130,246,0.75) inset;
 }
 
 .products {

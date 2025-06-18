@@ -22,8 +22,7 @@ const Checkout = () => {
         const cartdata = localStorage.getItem('cart');
         const cartjson = cartdata ? JSON.parse(cartdata) : [];
         setCart(cartjson)
-        console.log(cartjson)
-        const stockSum = cartjson.reduce((sum, product) => sum + (product.stock * product.price), 0)
+        const stockSum = cartjson.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
         setSum(stockSum);
     }, [])
 
@@ -59,6 +58,8 @@ const Checkout = () => {
 
         const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
         window.open(url, '_blank')
+
+        console.log()
         
         const order = {
             userToken: userToken,
@@ -108,13 +109,13 @@ const Checkout = () => {
                             return (
                                 <div key={i} className={styles.cartItem}>
                                     <div className={styles.leftCartSection}>
-                                        <Image src={product.image} alt="ducky" className={styles.ducky} />
+                                        <img src={product.Image} alt="ducky" className={styles.ducky} />
                                         <div className={styles.leftDetails}>
-                                            <h5 className={styles.name}>{product.name}</h5>
-                                            <h5>stock {product.stock}</h5>
+                                            <h5 className={styles.name}>{product.Name}</h5>
+                                            <h5>stock {product.Stock}</h5>
                                         </div>
                                     </div>
-                                    <h4 className={styles.price}>{product.price} Fr</h4>
+                                    <h4 className={styles.price}>{product.Price} Fr</h4>
                                 </div>
                             )
                         })}

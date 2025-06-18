@@ -12,148 +12,9 @@ import ProductAPI from "@/lib/app/Products"
 
 import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
+import OrdersAPI from '@/lib/app/Orders'
 
 const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
-
-const ordersArray = [
-  {
-    OrderID: "1",
-    UserID: "1",
-    Products: [
-      { ProductID: "1", Name: "Laptop", Price: 999.99, Quantity: 1 },
-      { ProductID: "2", Name: "Mouse", Price: 29.99, Quantity: 2 }
-    ],
-    OrderDate: "2025-06-11",
-    State: "D"
-  },
-  {
-    OrderID: "2",
-    UserID: "2",
-    Products: [
-      { ProductID: "3", Name: "Keyboard", Price: 59.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-10",
-    State: "D"
-  },
-  {
-    OrderID: "3",
-    UserID: "3",
-    Products: [
-      { ProductID: "4", Name: "Monitor", Price: 199.99, Quantity: 1 },
-      { ProductID: "5", Name: "Headphones", Price: 79.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-09",
-    State: "C"
-  },
-  {
-    OrderID: "4",
-    UserID: "1",
-    Products: [
-      { ProductID: "6", Name: "Webcam", Price: 89.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-08",
-    State: "D"
-  },
-  {
-    OrderID: "5",
-    UserID: "4",
-    Products: [
-      { ProductID: "7", Name: "Speaker", Price: 149.99, Quantity: 2 }
-    ],
-    OrderDate: "2025-06-07",
-    State: "P"
-  },
-  {
-    OrderID: "6",
-    UserID: "5",
-    Products: [
-      { ProductID: "8", Name: "Tablet", Price: 299.99, Quantity: 1 },
-      { ProductID: "9", Name: "Stylus", Price: 49.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-06",
-    State: "C"
-  },
-  {
-    OrderID: "7",
-    UserID: "2",
-    Products: [
-      { ProductID: "10", Name: "Mouse Pad", Price: 19.99, Quantity: 3 }
-    ],
-    OrderDate: "2025-06-05",
-    State: "D"
-  },
-  {
-    OrderID: "8",
-    UserID: "3",
-    Products: [
-      { ProductID: "11", Name: "External Drive", Price: 129.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-04",
-    State: "P"
-  },
-  {
-    OrderID: "9",
-    UserID: "4",
-    Products: [
-      { ProductID: "12", Name: "USB Hub", Price: 39.99, Quantity: 2 },
-      { ProductID: "13", Name: "Cable", Price: 9.99, Quantity: 4 }
-    ],
-    OrderDate: "2025-06-03",
-    State: "C"
-  },
-  {
-    OrderID: "10",
-    UserID: "5",
-    Products: [
-      { ProductID: "14", Name: "Printer", Price: 249.99, Quantity: 1 }
-    ],
-    OrderDate: "2025-06-02",
-    State: "P"
-  }
-];
-
-const users = [
-  {
-    UserID: "1",
-    FirstName: "Max",
-    Name: "Imal",
-    Address: "Zürichstrasse 72",
-    PLZ: "3012",
-    City: "Zürich"
-  },
-  {
-    UserID: "2",
-    FirstName: "Anna",
-    Name: "Muster",
-    Address: "Bahnhofstrasse 10",
-    PLZ: "8001",
-    City: "Zürich"
-  },
-  {
-    UserID: "3",
-    FirstName: "Luca",
-    Name: "Schmidt",
-    Address: "Postgasse 5",
-    PLZ: "3000",
-    City: "Bern"
-  },
-  {
-    UserID: "4",
-    FirstName: "Sara",
-    Name: "Meier",
-    Address: "Limmatquai 3",
-    PLZ: "8001",
-    City: "Zürich"
-  },
-  {
-    UserID: "5",
-    FirstName: "Jonas",
-    Name: "Huber",
-    Address: "Hauptstrasse 45",
-    PLZ: "4051",
-    City: "Basel"
-  }
-];
 
 export default function Dashboard() {
   const [auth, setAuth] = useState(false)
@@ -165,7 +26,7 @@ export default function Dashboard() {
 
   const [products, setProducts] = useState()
 
-  const [orders, setOrders] = useState(ordersArray)
+  const [orders, setOrders] = useState([])
   const [activeOrder, setActiveOrder] = useState(null)
 
   useEffect(() => {
@@ -186,6 +47,15 @@ export default function Dashboard() {
     }
   }
 
+  useEffect(() => {
+    const loadOrder = async () => {
+      const ordersArray = await OrdersAPI.getOrders();
+      setOrders(ordersArray);
+    };
+
+    loadOrder();
+  }, []);
+
   const handleDragOver = (event) => {
     const { over } = event
   }
@@ -195,51 +65,62 @@ export default function Dashboard() {
     setActiveOrder(activeOrderData)
 
     const totalRaw = activeOrderData.Products.reduce((sum, product) => {
-      return sum + product.Price * product.Quantity;
+      return sum + parseFloat(product.Price) * 1;
     }, 0);
 
     setTotal(totalRaw)
   }
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event
+  const handleDragEnd = async (event) => {
+    const { active, over } = event;
 
-    setActiveOrder(null)
+    setActiveOrder(null);
 
-    if (!over) return
+    if (!over) return;
 
-    const activeOrderId = active.id
-    const overContainerId = over.id
+    const activeOrderId = active.id;
 
-    const activeOrder = orders.find(order => order.OrderID === activeOrderId)
-    if (!activeOrder) return
+    const overContainerId = over.id;
 
-    let newState
-    if (overContainerId === 'payment-column' || over.data?.current?.type === 'column' && over.data.current.state === 'P') {
-      newState = 'P'
-    } else if (overContainerId === 'delivery-column' || over.data?.current?.type === 'column' && over.data.current.state === 'D') {
-      newState = 'D'
-    } else if (overContainerId === 'completed-column' || over.data?.current?.type === 'column' && over.data.current.state === 'C') {
-      newState = 'C'
+    const activeOrder = orders.find(order => order.OrderID === activeOrderId);
+    if (!activeOrder) return;
+
+    let newState;
+    if (
+      overContainerId === 'payment-column' || 
+      (over.data?.current?.type === 'column' && over.data.current.state === 'P')
+    ) {
+      newState = 'P';
+    } else if (
+      overContainerId === 'delivery-column' || 
+      (over.data?.current?.type === 'column' && over.data.current.state === 'D')
+    ) {
+      newState = 'D';
+    } else if (
+      overContainerId === 'completed-column' || 
+      (over.data?.current?.type === 'column' && over.data.current.state === 'C')
+    ) {
+      newState = 'C';
     } else {
-      const overOrder = orders.find(order => order.OrderID === over.id)
+      const overOrder = orders.find(order => order.OrderID === over.id);
       if (overOrder) {
-        newState = overOrder.State
+        newState = overOrder.State;
       } else {
-        return
+        return;
       }
     }
 
     if (activeOrder.State !== newState) {
-      setOrders(prevOrders =>
-        prevOrders.map(order =>
-          order.OrderID === activeOrderId
-            ? { ...order, State: newState }
-            : order
-        )
-      )
+      const state = {
+        state: newState
+      }
+      
+      const res = await OrdersAPI.updateState(state, activeOrderId)
+
+      const freshOrders = await OrdersAPI.getOrders();
+      setOrders(freshOrders);
     }
-  }
+  };
 
   const handleDelete = async (id) => {
     await ProductAPI.deleteProduct(id);
@@ -276,7 +157,6 @@ export default function Dashboard() {
             </Link>
             {products.map((product, i) => {
               const image = product.Image;
-              console.log(i, ". ImageSrc: ", image)
 
               return (
                 <div key={i} className={styles.product}>
@@ -329,14 +209,15 @@ export default function Dashboard() {
               {activeOrder ? (
                 <div className={styles.dragOverlay}>
                   <div className={styles.adressInf}>
-                    <p>{users[activeOrder.UserID - 1].Address}</p>
-                    <p>{users[activeOrder.UserID - 1].PLZ}</p>
-                    <p>{users[activeOrder.UserID - 1].City}</p>
+                    <p>{activeOrder.Address}</p>
+                    <p>{activeOrder.PLZ}</p>
+                    <p>{activeOrder.Village}</p>
+                    <p>{activeOrder.City}</p>
                   </div>
                   <div className={styles.userInf}>
-                    <p>{users[activeOrder.UserID - 1].FirstName}</p>
-                    <p>{users[activeOrder.UserID - 1].Name}</p>
-                    <h4>{total}</h4>
+                      <p>{activeOrder.FirstName}</p>
+                      <p>{activeOrder.Name}</p>
+                      <h4>{activeOrder.orderPrice} CHF</h4>
                   </div>
                 </div>
               ) : null}

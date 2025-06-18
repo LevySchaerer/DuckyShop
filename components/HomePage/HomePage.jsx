@@ -4,52 +4,24 @@ import ducky from '../../public/RubberDucky.jpg'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { TbShoppingCartPlus } from "react-icons/tb";
-
-const products = [
-    {
-        id: 1,
-        name: "Ducky Mr Pop",
-        price: 2.99,
-        image: ducky,
-        stock: 1
-    },
-    {
-        id: 2,
-        name: "Ducky Dr Max",
-        price: 2.99,
-        image: ducky,
-        stock: 1
-    },
-    {
-        id: 3,
-        name: "Ducky Mrs Pop",
-        price: 2.99,
-        image: ducky,
-        stock: 1
-    },
-    {
-        id: 4,
-        name: "Mrs Pop",
-        price: 2.99,
-        image: ducky,
-        stock: 1
-    }
-];
+import ProductAPI from "@/lib/app/Products";
 
 export default function HomePage() {
     const [index, setIndex] = useState(0);
+    const [products, setProducts] = useState([])
     const [flyingItems, setFlyingItems] = useState([]);
 
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            next();
-        }, 7000);
-
-        return () => clearInterval(interval);
-    }, []);
+        const loadProducts = async () => {
+            const productArray = await ProductAPI.getProducts()
+            setProducts(productArray)
+        }
+        
+        loadProducts();
+    }, [])
 
     function calculateSliderDiff(index) {
         const range = (products.length - 1) * 300;
@@ -63,9 +35,9 @@ export default function HomePage() {
         const existingProductIndex = cart.findIndex(item => item.id === product.id);
     
         if (existingProductIndex !== -1) {
-            cart[existingProductIndex].stock += 1;
+            cart[existingProductIndex].Stock += 1;
         } else {
-            cart.push({ ...product, stock: 1 });
+            cart.push({ ...product, Stock: 1 });
         }
     
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -100,10 +72,10 @@ export default function HomePage() {
                     <div className={styles.slider} style={{ transform: `translateX(${calculateSliderDiff(index)}px)` }}>
                         {products.map((product, i) => (
                             <div key={i} className={`${styles.slide} ${i === index ? styles.active : ''}`}>
-                                <Image src={product.image} alt="ducky" className={styles.ducky} />
+                                <img src={product.Image} alt="ducky" className={styles.ducky} />
                                 <div className={styles.details}>
-                                    <h1 className={styles.price}>{product.price} Fr</h1>
-                                    <h1 className={styles.name}>{product.name}</h1>
+                                    <h1 className={styles.price}>{product.Price} Fr</h1>
+                                    <h1 className={styles.name}>{product.Name}</h1>
                                     <button 
                                         className={styles.cartButton} 
                                         onClick={(e) => addToCart(product, e)}>
@@ -130,7 +102,7 @@ export default function HomePage() {
                         '--end-y': `${item.endY}px`,
                     }}
                 >
-                    <Image src={item.product.image} alt="flying ducky" className={styles.flyingDucky} />
+                    <img src={item.product.Image} alt="flying ducky" className={styles.flyingDucky} />
                 </div>
             ))}
         </div>
