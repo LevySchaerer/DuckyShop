@@ -4,7 +4,7 @@ name: Build and deploy Node.js app to Azure Web App - nextapp25
 on:
   push:
     branches:
-      - Develop
+      - main
   workflow_dispatch:
 # Trigger: Workflow startet automatisch bei Push auf Develop-Branch
 # oder manuell (workflow_dispatch)
