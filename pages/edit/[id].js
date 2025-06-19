@@ -21,11 +21,12 @@ export default function EditProduct() {
     const fetchProduct = async () => {
       const fetchedProduct = await ProductAPI.getProduct(id);
 
-      setProduct(fetchedProduct);
+      setProduct(fetchedProduct[0]);
     };
 
     fetchProduct();
   }, [id]);
+
 
   const authCheck = () => {
       if (sha256(password).toString() === token) {

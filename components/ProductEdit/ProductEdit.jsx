@@ -26,7 +26,7 @@ export default function ProductEdit({productProps}) {
         });
         
         if (image) {
-            base64Image = await fileToBase64(image);
+            const base64Image = await fileToBase64(image);
             setImage(base64Image);
         }
 
@@ -37,7 +37,7 @@ export default function ProductEdit({productProps}) {
             ...(image && { Image: image })
         }
 
-        ProductAPI.updateProduct(newProduct, product.ProductID)
+        ProductAPI.updateProduct(newProduct, product.id)
         window.location.href = '/dashboard'
     }
 
