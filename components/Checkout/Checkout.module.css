@@ -82,7 +82,7 @@
 }
 
 .name {
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .price {
@@ -130,4 +130,13 @@
 .CheckoutInput {
     height: 30px;
     font-size: 18px;
+}
+
+.amount {
+    font-weight: 200;
+    padding-top: 5px;
+}
+
+.amount span {
+    font-weight: 900;
 }

@@ -67,14 +67,15 @@ export default function Create() {
     };
 
     if (!auth) {
-    return (
-        <div className={styles.loginContainer}>
-            <h1>Login</h1>
-            <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password" />
-            <button onClick={authCheck} className={styles.button}>Submit</button>
-            <h4>{err}</h4>
-        </div>
-    )}
+      return (
+        <form onSubmit={(e) => { e.preventDefault(); authCheck(); }} className={styles.loginContainer}>
+          <h1>Login</h1>
+          <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password"/>
+          <button type="submit" className={styles.button}>Submit</button>
+          <h4>{err}</h4>
+        </form>
+      );
+    }
 
     return (
         <div className={styles.container}>

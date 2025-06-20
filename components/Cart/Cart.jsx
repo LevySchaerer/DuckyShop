@@ -18,7 +18,6 @@ const Cart = ({ isOpen, onClose }) => {
         const cartdata = localStorage.getItem('cart');
         const cartjson = cartdata ? JSON.parse(cartdata) : [];
         setCart(cartjson)
-        console.log(cartjson)
         const amountSum = cartjson.reduce((sum, product) => sum + (product.Amount * product.Price), 0)
         setSum(amountSum);
     }, [isOpen])

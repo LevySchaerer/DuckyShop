@@ -36,9 +36,9 @@ export default function HomePage() {
         const existingProductIndex = cart.findIndex(item => item.id === product.id);
     
         if (existingProductIndex !== -1) {
-            cart[existingProductIndex].Stock += 1;
+            cart[existingProductIndex].Amount += 1;
         } else {
-            cart.push({ ...product, Stock: 1 });
+            cart.push({ ...product, Amount: 1 });
         }
     
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -63,6 +63,13 @@ export default function HomePage() {
         }, 1000);
     };
 
+    const checkAvailability = (product) => {
+        if (product.Stock > 0) {
+            return true;
+        }
+        return false;
+    }
+
     return (
         <div className={styles.body}>
             <div className={styles.container}>
@@ -77,12 +84,18 @@ export default function HomePage() {
                                 <div className={styles.details}>
                                     <h1 className={styles.price}>{product.Price} Fr</h1>
                                     <h1 className={styles.name}>{product.Name}</h1>
-                                    <button 
-                                        className={styles.cartButton} 
-                                        onClick={(e) => addToCart(product, e)}>
-                                        <TbShoppingCartPlus size={32}/>
-                                        Add to Cart
-                                    </button>
+                                    {checkAvailability(product) ? (
+                                        <button 
+                                            className={styles.cartButton} 
+                                            onClick={(e) => addToCart(product, e)}>
+                                            <TbShoppingCartPlus size={32}/>
+                                            Add to Cart
+                                        </button>
+                                    ) : (
+                                        <button className={styles.soldOutButton}>
+                                            SOLD OUT
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         ))}

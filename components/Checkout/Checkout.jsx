@@ -22,8 +22,8 @@ const Checkout = () => {
         const cartdata = localStorage.getItem('cart');
         const cartjson = cartdata ? JSON.parse(cartdata) : [];
         setCart(cartjson)
-        const stockSum = cartjson.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
-        setSum(stockSum);
+        const amountSum = cartjson.reduce((sum, product) => sum + (product.Amount * product.Price), 0)
+        setSum(amountSum);
     }, [])
 
     const handleChange = (e) => {
@@ -111,8 +111,8 @@ const Checkout = () => {
                                     <div className={styles.leftCartSection}>
                                         <img src={product.Image} alt="ducky" className={styles.ducky} />
                                         <div className={styles.leftDetails}>
-                                            <h5 className={styles.name}>{product.Name}</h5>
-                                            <h5>stock {product.Stock}</h5>
+                                            <h3 className={styles.name}>{product.Name}</h3>
+                                            <h5 className={styles.amount}>Amount: <span>{product.Amount}</span></h5>
                                         </div>
                                     </div>
                                     <h4 className={styles.price}>{product.Price} Fr</h4>

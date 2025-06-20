@@ -88,6 +88,18 @@
   background: #064589;
 }
 
+.soldOutButton {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border: solid 4px red;
+  color: red;
+  margin-top: 40px;
+  background: transparent;
+  padding: 7px 25px;
+  border-radius: 16px;
+}
+
 .price {
     font-weight: 700;
     letter-spacing: -2px;
