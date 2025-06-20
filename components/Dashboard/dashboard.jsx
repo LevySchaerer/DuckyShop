@@ -1,8 +1,5 @@
 import { act, useEffect, useState } from 'react'
 import styles from './dashboard.module.css'
-import sha256 from 'crypto-js/sha256'
-import ducky from '../../public/RubberDucky.jpg'
-import Image from 'next/image'
 import { GrAdd } from "react-icons/gr";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -14,17 +11,12 @@ import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
 import OrdersAPI from '@/lib/app/Orders'
 
-const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
-
 export default function Dashboard() {
-  const [auth, setAuth] = useState(false)
-  const [err, setErr] = useState('')
-  const [password, setPassword] = useState('')
   const [selectedTab, setSelectedTab] = useState('Products')
   const [total, setTotal] = useState(0)
   const [updateProducts, setUpdateProducts] = useState(false)
 
-  const [products, setProducts] = useState()
+  const [products, setProducts] = useState([])
 
   const [orders, setOrders] = useState([])
   const [activeOrder, setActiveOrder] = useState(null)
@@ -38,14 +30,6 @@ export default function Dashboard() {
     getProducts();
     setUpdateProducts(false)
   }, [updateProducts]);
-
-  const authCheck = () => {
-    if (sha256(password).toString() === token) {
-      setAuth(true)
-    } else {
-      setErr("Wrong Password")
-    }
-  }
 
   useEffect(() => {
     const loadOrder = async () => {
@@ -129,17 +113,6 @@ export default function Dashboard() {
     window.location.href = `/edit/${id}`;
   }
 
-  if (!auth) {
-    return (
-      <div className={styles.loginContainer}>
-        <h1>Login</h1>
-        <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password" />
-        <button onClick={authCheck} className={styles.button}>Submit</button>
-        <h4>{err}</h4>
-      </div>
-    )
-  }
-
   return (
     <div className={styles.body}>
       <div className={styles.topSelector}>
@@ -166,8 +139,8 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className={styles.productEdit}>
-                    <FaRegEdit onClick={() => handleEdit(product.id)} className={styles.editIcons} size={20} />
-                    <FaRegTrashCan onClick={() => handleDelete(product.id)} className={styles.editIcons} color='#b81d1d' size={20} />
+                    <FaRegEdit onClick={() => handleEdit(product.ProductID)} className={styles.editIcons} size={20} />
+                    <FaRegTrashCan onClick={() => handleDelete(product.ProductID)} className={styles.editIcons} color='#b81d1d' size={20} />
                   </div>
                 </div>
               )

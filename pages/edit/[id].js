@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import ProductAPI from '@/lib/app/Products';
 import ProductEdit from '@/components/ProductEdit/ProductEdit';
 
-const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
+const token = '5eb1bb4d5ebd1578ed23535220158822321975646b3a37d5ee5ed3542887be33'
 
 export default function EditProduct() {
   const [auth, setAuth] = useState(false)
@@ -20,8 +20,7 @@ export default function EditProduct() {
 
     const fetchProduct = async () => {
       const fetchedProduct = await ProductAPI.getProduct(id);
-
-      setProduct(fetchedProduct[0]);
+      setProduct(fetchedProduct);
     };
 
     fetchProduct();
@@ -33,18 +32,19 @@ export default function EditProduct() {
           setAuth(true)
       } else {
           setErr("Wrong Password")
-      }
+      } 
   }
   
   if (!auth) {
     return (
-      <div className={styles.loginContainer}>
-            <h1>Login</h1>
-            <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password" />
-            <button onClick={authCheck} className={styles.button}>Submit</button>
-            <h4>{err}</h4>
-        </div>
-  )}
+      <form onSubmit={(e) => { e.preventDefault(); authCheck(); }} className={styles.loginContainer}>
+        <h1>Login</h1>
+        <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password"/>
+        <button type="submit" className={styles.button}>Submit</button>
+        <h4>{err}</h4>
+      </form>
+    );
+  }
   
   if (!product) return <div className="text-center p-4">Loading...</div>;
   

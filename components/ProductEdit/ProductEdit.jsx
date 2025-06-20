@@ -37,7 +37,7 @@ export default function ProductEdit({productProps}) {
             ...(image && { Image: image })
         }
 
-        ProductAPI.updateProduct(newProduct, product.id)
+        ProductAPI.updateProduct(newProduct, product.ProductID)
         window.location.href = '/dashboard'
     }
 
@@ -47,7 +47,7 @@ export default function ProductEdit({productProps}) {
             <input type="text" onChange={(e) => {setName(e.target.value)}} value={name} />
             <input type="text" onChange={(e) => {setStock(e.target.value)}} value={stock} />
             <input onChange={(e) => setImage(e.target.files[0])} className={styles.imageInput} type="file" accept="image/*"/>
-            <img src={product.Image} alt={product.name} className={styles.productImage} />
+            <img src={product.Image} alt={product.Name} className={styles.productImage} />
             <button onClick={handleSave}>Save</button>
             <h3>{valError}</h3>
         </div>

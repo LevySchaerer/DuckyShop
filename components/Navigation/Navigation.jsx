@@ -16,7 +16,7 @@ const Navigation = () => {
             const cartData = JSON.parse(localStorage.getItem('cart'))
             setCart(cartData)
     
-            const total = cartData.reduce((sum, product) => sum + (product.Stock), 0)
+            const total = cartData.reduce((sum, product) => sum + (product.Amount), 0)
             setCartAmount(total)
         }, 500);
 

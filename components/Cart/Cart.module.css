@@ -83,12 +83,12 @@
     border-bottom: solid 1px white;
 }
 
-.stockDisplay {
+.amountDisplay {
     margin-top: 5px;
     display: flex;
 }
 
-.stock {
+.amount {
     margin: 0 8px;
 }
 
