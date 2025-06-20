@@ -51,6 +51,7 @@ export default function Dashboard() {
     const loadOrder = async () => {
       const ordersArray = await OrdersAPI.getOrders();
       setOrders(ordersArray);
+      console.log(ordersArray)
     };
 
     loadOrder();
@@ -111,11 +112,8 @@ export default function Dashboard() {
     }
 
     if (activeOrder.State !== newState) {
-      const state = {
-        state: newState
-      }
       
-      const res = await OrdersAPI.updateState(state, activeOrderId)
+      const res = await OrdersAPI.updateState(newState, activeOrderId)
 
       const freshOrders = await OrdersAPI.getOrders();
       setOrders(freshOrders);
