@@ -31,9 +31,10 @@ export default function HomePage() {
     }
 
     const addToCart = (product, event) => {
+        console.log(product, "Penis")
 
         const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        const existingProductIndex = cart.findIndex(item => item.id === product.id);
+        const existingProductIndex = cart.findIndex(item => item.ProductID === product.ProductID);
     
         if (existingProductIndex !== -1) {
             cart[existingProductIndex].Amount += 1;

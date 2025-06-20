@@ -56,11 +56,13 @@ const Checkout = () => {
 
     const handleSubmit = (userToken) => {
 
-        const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
-        window.open(url, '_blank')
+        //const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
+        //window.open(url, '_blank')
 
-        const productIDs = cart.map(product => product.ProductID);
-        console.log(productIDs)
+        const products = cart.map(product => ({
+            ProductID: product.ProductID,
+            Amount: product.Amount
+        }));
         
         const order = {
             userToken: userToken,
@@ -72,12 +74,12 @@ const Checkout = () => {
             PLZ: form.plz,
             City: form.city,
             orderPrice: sum,
-            Products: productIDs
+            Products: products
         }
 
         OrdersAPI.postOrder(order);
-        window.location.href = "/"
-        localStorage.setItem("cart", "[]")
+        //window.location.href = "/"
+        //localStorage.setItem("cart", "[]")
     }
 
     return (
