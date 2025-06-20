@@ -56,8 +56,8 @@ const Checkout = () => {
 
     const handleSubmit = (userToken) => {
 
-        //const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
-        //window.open(url, '_blank')
+        const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
+        window.open(url, '_blank')
 
         const products = cart.map(product => ({
             ProductID: product.ProductID,
@@ -78,8 +78,8 @@ const Checkout = () => {
         }
 
         OrdersAPI.postOrder(order);
-        //window.location.href = "/"
-        //localStorage.setItem("cart", "[]")
+        window.location.href = "/"
+        localStorage.setItem("cart", "[]")
     }
 
     return (
