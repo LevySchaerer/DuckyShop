@@ -19,8 +19,8 @@ const Cart = ({ isOpen, onClose }) => {
         const cartjson = cartdata ? JSON.parse(cartdata) : [];
         setCart(cartjson)
         console.log(cartjson)
-        const stockSum = cartjson.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
-        setSum(stockSum);
+        const amountSum = cartjson.reduce((sum, product) => sum + (product.Amount * product.Price), 0)
+        setSum(amountSum);
     }, [isOpen])
     
     useEffect(() => {
@@ -42,20 +42,20 @@ const Cart = ({ isOpen, onClose }) => {
     const updateCart = (newCart) => {
         setCart(newCart)
         localStorage.setItem('cart', JSON.stringify(newCart));
-        const stockSum = newCart.reduce((sum, product) => sum + (product.Stock * product.Price), 0)
-        setSum(stockSum);
+        const amountSum = newCart.reduce((sum, product) => sum + (product.Amount * product.Price), 0)
+        setSum(amountSum);
     }
 
-    const increaseStock = (index) => {
+    const increaseAmount = (index) => {
         const newCart = [...cart]
-        newCart[index].Stock += 1;
+        newCart[index].Amount += 1;
         updateCart(newCart)
     }
 
-    const decreaseStock = (index) => {
+    const decreaseAmount = (index) => {
         const newCart = [...cart];
-        if (newCart[index].Stock > 1) {
-            newCart[index].Stock -= 1;
+        if (newCart[index].Amount > 1) {
+            newCart[index].Amount -= 1;
         } else {
             newCart.splice(index, 1)
         }
@@ -82,10 +82,10 @@ const Cart = ({ isOpen, onClose }) => {
                                             <img src={product.Image} alt="ducky" className={styles.ducky} />
                                             <div className={styles.leftDetails}>
                                                 <h5 className={styles.name}>{product.Name}</h5>
-                                                <div className={styles.stockDisplay}>
-                                                    <CiCircleMinus size={23} onClick={() => decreaseStock(i)}/>
-                                                    <h4 className={styles.stock}>{product.Stock}</h4>
-                                                    <CiCirclePlus size={23} onClick={() => increaseStock(i)}/>
+                                                <div className={styles.amountDisplay}>
+                                                    <CiCircleMinus size={23} onClick={() => decreaseAmount(i)}/>
+                                                    <h4 className={styles.amount}>{product.Amount}</h4>
+                                                    <CiCirclePlus size={23} onClick={() => increaseAmount(i)}/>
                                                 </div>
                                             </div>
                                         </div>

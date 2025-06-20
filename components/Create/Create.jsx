@@ -4,7 +4,7 @@ import styles from './Create.module.css'
 import ducky from '../../public/RubberDucky.jpg'
 import ProductAPI from "@/lib/app/Products"
 
-const token = '5EB1BB4D5EBD1578ED23535220158822321975646B3A37D5EE5ED3542887BE33'
+const token = '5eb1bb4d5ebd1578ed23535220158822321975646b3a37d5ee5ed3542887be33'
 
 const initialProducts = [
   {
