@@ -17,7 +17,8 @@ export default function HomePage() {
     useEffect(() => {
         const loadProducts = async () => {
             const productArray = await ProductAPI.getProducts()
-            setProducts(productArray)
+            const shuffledArray = [...productArray].sort(() => 0.5 - Math.random());
+            setProducts(shuffledArray.slice(0, 5))
         }
         
         loadProducts();
