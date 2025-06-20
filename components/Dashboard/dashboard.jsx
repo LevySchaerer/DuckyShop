@@ -1,8 +1,5 @@
 import { act, useEffect, useState } from 'react'
 import styles from './dashboard.module.css'
-import sha256 from 'crypto-js/sha256'
-import ducky from '../../public/RubberDucky.jpg'
-import Image from 'next/image'
 import { GrAdd } from "react-icons/gr";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -14,17 +11,12 @@ import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core'
 import Column from '../Column/Column'
 import OrdersAPI from '@/lib/app/Orders'
 
-const token = '5eb1bb4d5ebd1578ed23535220158822321975646b3a37d5ee5ed3542887be33'
-
 export default function Dashboard() {
-  const [auth, setAuth] = useState(false)
-  const [err, setErr] = useState('')
-  const [password, setPassword] = useState('')
   const [selectedTab, setSelectedTab] = useState('Products')
   const [total, setTotal] = useState(0)
   const [updateProducts, setUpdateProducts] = useState(false)
 
-  const [products, setProducts] = useState()
+  const [products, setProducts] = useState([])
 
   const [orders, setOrders] = useState([])
   const [activeOrder, setActiveOrder] = useState(null)
@@ -38,14 +30,6 @@ export default function Dashboard() {
     getProducts();
     setUpdateProducts(false)
   }, [updateProducts]);
-
-  const authCheck = () => {
-    if (sha256(password).toString() === token) {
-      setAuth(true)
-    } else {
-      setErr("Wrong Password")
-    }
-  }
 
   useEffect(() => {
     const loadOrder = async () => {
@@ -127,17 +111,6 @@ export default function Dashboard() {
 
   const handleEdit = (id) => {
     window.location.href = `/edit/${id}`;
-  }
-
-  if (!auth) {
-    return (
-      <form onSubmit={(e) => { e.preventDefault(); authCheck(); }} className={styles.loginContainer}>
-        <h1>Login</h1>
-        <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password"/>
-        <button type="submit" className={styles.button}>Submit</button>
-        <h4>{err}</h4>
-      </form>
-    );
   }
 
   return (
