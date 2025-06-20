@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import ProductAPI from '@/lib/app/Products';
 import ProductEdit from '@/components/ProductEdit/ProductEdit';
 
-const token = '32ebb1abcc1c601ceb9c4e3c4faba0caa5b85bb98c4f1e6612c40faa528a91c9'
+const token = '5EB1BB4D5EBD1578ED23535220158822321975646B3A37D5EE5ED3542887BE33'
 
 export default function EditProduct() {
   const [auth, setAuth] = useState(false)
