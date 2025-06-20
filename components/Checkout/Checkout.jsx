@@ -59,7 +59,8 @@ const Checkout = () => {
         const url = `https://go.twint.ch/1/e/tw?tw=acq.gB5Bt_P0Tlm4uYagE3XGhD34KJs-T0giOnsiOTj__q7SqT6rUJkBT23frkZrmONz.&amount=${sum}&trxInfo=${userToken}`
         window.open(url, '_blank')
 
-        console.log()
+        const productIDs = cart.map(product => product.ProductID);
+        console.log(productIDs)
         
         const order = {
             userToken: userToken,
@@ -71,7 +72,7 @@ const Checkout = () => {
             PLZ: form.plz,
             City: form.city,
             orderPrice: sum,
-            Products: [28, 30]
+            Products: productIDs
         }
 
         OrdersAPI.postOrder(order);
