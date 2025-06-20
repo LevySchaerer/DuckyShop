@@ -32,7 +32,7 @@ export default function EditProduct() {
           setAuth(true)
       } else {
           setErr("Wrong Password")
-      }
+      } 
   }
   
   if (!auth) {
