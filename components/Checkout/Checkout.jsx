@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaInfo } from "react-icons/fa";
 import sha256 from 'crypto-js/sha256'
 import OrdersAPI from "@/lib/app/Orders";
+import ProductAPI from "@/lib/app/Products";
 
 const Checkout = () => {
     const [sum, setSum] = useState(0)
@@ -60,6 +61,10 @@ const Checkout = () => {
             ProductID: product.ProductID,
             Amount: product.Amount
         }));
+
+        cart.map(product => {
+            ProductAPI.updateProduct({ Stock: product.Stock - 1 }, product.ProductID)
+        })
         
         const order = {
             userToken: userToken,
