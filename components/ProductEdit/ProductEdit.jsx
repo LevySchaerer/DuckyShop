@@ -18,7 +18,6 @@ export default function ProductEdit({productProps}) {
         }
 
         const fileToBase64 = (file) => new Promise((resolve, reject) => {
-            console.log(file)
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);

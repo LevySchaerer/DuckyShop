@@ -10,6 +10,7 @@ export default function HomePage() {
     const [index, setIndex] = useState(0);
     const [products, setProducts] = useState([])
     const [flyingItems, setFlyingItems] = useState([]);
+    const [addToCartError, setAddToCartError] = useState("");
 
     const prev = () => setIndex((prev) => (prev - 1 + products.length) % products.length);
     const next = () => setIndex((prev) => (prev + 1) % products.length);
@@ -24,6 +25,13 @@ export default function HomePage() {
         loadProducts();
     }, [])
 
+    useEffect(() => {
+        if (addToCartError) {
+            const timer = setTimeout(() => setAddToCartError(""), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [addToCartError]);
+
     function calculateSliderDiff(index) {
         const range = (products.length - 1) * 300;
         const middle = (products.length - 1) / 2;
@@ -31,13 +39,15 @@ export default function HomePage() {
     }
 
     const addToCart = (product, event) => {
-        console.log(product, "Penis")
-
         const cart = JSON.parse(localStorage.getItem("cart") || "[]");
         const existingProductIndex = cart.findIndex(item => item.ProductID === product.ProductID);
     
         if (existingProductIndex !== -1) {
             cart[existingProductIndex].Amount += 1;
+            if (cart[existingProductIndex].Amount > cart[existingProductIndex].Stock) {
+                setAddToCartError(`Sorry, only ${product.Stock} available`);
+                return;
+            }
         } else {
             cart.push({ ...product, Amount: 1 });
         }
@@ -100,6 +110,9 @@ export default function HomePage() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    <div className={`${styles.addToCartError} ${addToCartError ? styles.show : ""}`}>
+                        {addToCartError}
                     </div>
                     <IoIosArrowBack size={60} onClick={prev} className={`${styles.arrow} ${styles.arrowLeft}`}/>
                     <IoIosArrowForward size={60} onClick={next} className={`${styles.arrow} ${styles.arrowRight}`}/>
