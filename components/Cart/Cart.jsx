@@ -13,6 +13,14 @@ const Cart = ({ isOpen, onClose }) => {
     const [animateIn, setAnimateIn] = useState(false);
     const [sum, setSum] = useState(0)
     const [cart, setCart] = useState([])
+    const [addToCartError, setAddToCartError] = useState("");
+
+    useEffect(() => {
+        if (addToCartError) {
+            const timer = setTimeout(() => setAddToCartError(""), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [addToCartError]);
 
     useEffect(() => {
         const cartdata = localStorage.getItem('cart');
@@ -46,9 +54,15 @@ const Cart = ({ isOpen, onClose }) => {
     }
 
     const increaseAmount = (index) => {
-        const newCart = [...cart]
-        newCart[index].Amount += 1;
-        updateCart(newCart)
+        const newCart = [...cart];
+        const item = newCart[index];
+        if (item.Amount < item.Stock) {
+            item.Amount += 1;
+            updateCart(newCart);
+        } else {
+            setAddToCartError(`Sorry, only ${item.Stock} available`);
+            return;
+        }
     }
 
     const decreaseAmount = (index) => {
@@ -89,7 +103,11 @@ const Cart = ({ isOpen, onClose }) => {
                                             </div>
                                         </div>
                                         <h4 className={styles.price}>{product.Price} Fr</h4>
+                                        <div className={`${styles.addToCartError} ${addToCartError ? styles.show : ""}`}>
+                                            {addToCartError}
+                                        </div>
                                     </div>
+                                    
                                 )
                             })}
                         </div>
