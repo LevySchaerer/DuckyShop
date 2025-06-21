@@ -1,60 +1,59 @@
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.3rem;
-    z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.3rem;
+	z-index: 100;
 }
 
 .links {
-    display: flex;
-    gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }
 
 .links ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
 }
 
 .links li {
-    margin: 0 1.4rem;
+	margin: 0 1.4rem;
 }
 
 .links a {
-    font-weight: 500;
-    text-decoration: none;
-    color: #333;
+	font-weight: 500;
+	text-decoration: none;
+	color: #333;
 }
 
 .links a:hover {
-    color: #7a7a7a;
-    font-weight: 500;
+	color: #7a7a7a;
+	font-weight: 500;
 }
 
 @media (prefers-color-scheme: dark) {
-    .links a {
-        text-decoration: none;
-        color: #ffffff;
-    }
-    .navIcon span {
-        background: #ffffff;
-    }
+	.links a {
+		text-decoration: none;
+		color: #ffffff;
+	}
+	.navIcon span {
+		background: #ffffff;
+	}
 }
 
 @media only screen and (max-width: 830px) {
-    .links a {
-        font-size: 0.6rem;
-    }
+	.links a {
+		font-size: 0.6rem;
+	}
 
-    .links {
-        gap: 0.4rem;
-    }
-    
+	.links {
+		gap: 0.4rem;
+	}
 }
 
 .cartAmount {
-    margin-right: -20px;
+	margin-right: -20px;
 }

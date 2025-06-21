@@ -1,89 +1,89 @@
 .loginContainer {
-   display: flex;
-   row-gap: 20px;
-   flex-direction: column;
-   width: 300px;
+	display: flex;
+	row-gap: 20px;
+	flex-direction: column;
+	width: 300px;
 }
 
 .button {
-   background: #3b82f6;
-   height: 44px;
-   font-size: 14px;
-   color: #ffffff;
-   font-weight: 500;
-   border-radius: 6px;
-   cursor: pointer;
-   border: 2px solid #3b82f6;
-   transition: all 0.3s ease;
+	background: #3b82f6;
+	height: 44px;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 500;
+	border-radius: 6px;
+	cursor: pointer;
+	border: 2px solid #3b82f6;
+	transition: all 0.3s ease;
 }
 
 .button:hover {
-   color: #3b82f6;
-   background: transparent;
-   border: 2px solid #3b82f6;
-   transform: translateY(-1px);
-   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+	color: #3b82f6;
+	background: transparent;
+	border: 2px solid #3b82f6;
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
 
 .input {
-   outline: none;
-   border: 2px solid #3c3e41;
-   background: transparent;
-   height: 40px;
-   font-size: 14px;
-   padding: 10px;
-   border-radius: 4px;
-   transition: border-color 0.3s ease;
+	outline: none;
+	border: 2px solid #3c3e41;
+	background: transparent;
+	height: 40px;
+	font-size: 14px;
+	padding: 10px;
+	border-radius: 4px;
+	transition: border-color 0.3s ease;
 }
 
 .input:focus {
-   border: #2563eb solid 3px;
-   box-shadow: 0px 0px 18px -9px rgba(59,130,246,0.75) inset;
+	border: #2563eb solid 3px;
+	box-shadow: 0px 0px 18px -9px rgba(59, 130, 246, 0.75) inset;
 }
 
 .imageInput {
-   border: 3px dashed #3c3e41;
-   border-radius: 16px;
-   padding: 32px 20px;
-   text-align: center;
-   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.2) 100%);
-   transition: all 0.4s ease;
-   cursor: pointer;
-   position: relative;
-   overflow: hidden;
-   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-   color: #e5e7eb;
+	border: 3px dashed #3c3e41;
+	border-radius: 16px;
+	padding: 32px 20px;
+	text-align: center;
+	background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.2) 100%);
+	transition: all 0.4s ease;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	color: #e5e7eb;
 }
 
 .imageInput:hover {
-   border-color: #2563eb;
-   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.15) 100%);
+	border-color: #2563eb;
+	background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.15) 100%);
 }
 
 .imageInput::file-selector-button {
-   padding: 8px 16px;
-   border: none;
-   border-radius: 6px;
-   background-color: #3c3e41;
-   color: #fff;
-   font-size: 14px;
-   font-weight: 500;
-   cursor: pointer;
-   margin-right: 12px;
-   transition: all 0.3s ease;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	background-color: #3c3e41;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	margin-right: 12px;
+	transition: all 0.3s ease;
 }
 
 .imageInput:hover::file-selector-button {
-  background-color: #3b82f6;
-  color: #fff;
+	background-color: #3b82f6;
+	color: #fff;
 }
 
 .container {
-   display: flex;
-   flex-direction: column;
-   border: 3px solid #3b82f6;
-   border-radius: 8px;
-   padding: 30px;
-   gap: 20px;
-   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+	display: flex;
+	flex-direction: column;
+	border: 3px solid #3b82f6;
+	border-radius: 8px;
+	padding: 30px;
+	gap: 20px;
+	box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }

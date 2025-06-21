@@ -1,142 +1,143 @@
 .body {
-    margin-top: 50px;
-    width: 100%;
-    height: 600px;
-    display: flex;
-    justify-content: center;
+	margin-top: 50px;
+	width: 100%;
+	height: 600px;
+	display: flex;
+	justify-content: center;
 }
 
 .checkoutContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    background-color: #383838;
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	background-color: #383838;
 }
 
-.rightSection, .leftSection {
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
+.rightSection,
+.leftSection {
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+	padding: 40px;
 }
 
 .twintButton {
-    margin-top: auto;
-    border-radius: 6px;
-    display: flex;
-    width: fit-content;
-    cursor: pointer;
-    border: none;
+	margin-top: auto;
+	border-radius: 6px;
+	display: flex;
+	width: fit-content;
+	cursor: pointer;
+	border: none;
 }
 
 .twintButton:hover .twintImage {
-    content: url('https://go.twint.ch/static/img/button_light_en.svg');
+	content: url('https://go.twint.ch/static/img/button_light_en.svg');
 }
 
 .CartItems {
-    margin-top: 10px;
-    max-height: 250px;
-    overflow-y: auto;
+	margin-top: 10px;
+	max-height: 250px;
+	overflow-y: auto;
 }
 
 .CartItems::-webkit-scrollbar {
-    display: initial;
-    width: 8px;
+	display: initial;
+	width: 8px;
 }
 
 .CartItems::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 4px;
 }
 
 .CartItems::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 
 .cartItem {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    background-color: rgb(49, 49, 49);
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	background-color: rgb(49, 49, 49);
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 5px;
 }
 
 .leftCartSection {
-    display: flex;
+	display: flex;
 }
 
 .ducky {
-    display: flex;
-    align-self: center;
-    height: 60px;
-    width: auto;
-    margin: 0 10px;
+	display: flex;
+	align-self: center;
+	height: 60px;
+	width: auto;
+	margin: 0 10px;
 }
 
 .leftDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .name {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .price {
-    display: flex;
-    align-self: flex-end;
-    width: fit-content;
+	display: flex;
+	align-self: flex-end;
+	width: fit-content;
 }
 
 .totalPrice {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .totalPrice span {
-    border-bottom: solid 2px white;
+	border-bottom: solid 2px white;
 }
 
 .paymentSection {
-    margin-top: auto;
+	margin-top: auto;
 }
 
 .paymentInfo {
-    font-weight: 300;
-    color: red;
-    margin-bottom: 10px;
+	font-weight: 300;
+	color: red;
+	margin-bottom: 10px;
 }
 
 .infoIcon {
-    color: white;
+	color: white;
 }
 
 .title {
-    font-weight: 100;
-    margin-top: -40px;
+	font-weight: 100;
+	margin-top: -40px;
 }
 
 .sectionTitle {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .CheckoutInputTitel {
-    font-weight: 300;
-    margin-top: 10px;
+	font-weight: 300;
+	margin-top: 10px;
 }
 
 .CheckoutInput {
-    height: 30px;
-    font-size: 18px;
+	height: 30px;
+	font-size: 18px;
 }
 
 .amount {
-    font-weight: 200;
-    padding-top: 5px;
+	font-weight: 200;
+	padding-top: 5px;
 }
 
 .amount span {
-    font-weight: 900;
+	font-weight: 900;
 }
