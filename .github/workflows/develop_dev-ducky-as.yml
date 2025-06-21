@@ -2,43 +2,43 @@ name: Build and deploy Node.js app to Azure Web App - nextapp25
 # Name des Workflows, beschreibt was hier passiert (Build + Deployment einer Node.js App)
 
 on:
-  push:
-    branches:
-      - Develop
-  workflow_dispatch:
+    push:
+        branches:
+            - Develop
+    workflow_dispatch:
 # Trigger: Workflow startet automatisch bei Push auf Develop-Branch
 # oder manuell (workflow_dispatch)
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    # Job läuft auf der neuesten Ubuntu-VM
+    deploy:
+        runs-on: ubuntu-latest
+        # Job läuft auf der neuesten Ubuntu-VM
 
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    # Definiert die Deployment-Umgebung 'Production' und setzt die URL der Web-App als Output
+        environment:
+            name: 'Production'
+            url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+        # Definiert die Deployment-Umgebung 'Production' und setzt die URL der Web-App als Output
 
-    permissions:
-      id-token: write
-      contents: read
-    # Benötigte Berechtigungen für den Job (z.B. Azure Login Token, Repo-Content lesen)
+        permissions:
+            id-token: write
+            contents: read
+        # Benötigte Berechtigungen für den Job (z.B. Azure Login Token, Repo-Content lesen)
 
-    steps:
-      - uses: actions/checkout@v4
-      # Holt den aktuellen Code aus dem GitHub-Repo
+        steps:
+            - uses: actions/checkout@v4
+            # Holt den aktuellen Code aus dem GitHub-Repo
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      # Loggt sich bei Azure mit hinterlegten Credentials ein (Sicherheits-Token)
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                  creds: ${{ secrets.AZURE_CREDENTIALS }}
+            # Loggt sich bei Azure mit hinterlegten Credentials ein (Sicherheits-Token)
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'dev-ducky-as'
-          slot-name: 'Production'
-          package: .
-      # Deployt den gesamten aktuellen Ordner (.) zur Azure Web App 'dev-ducky-as' im Produktions-Slot
+            - name: Deploy to Azure Web App
+              id: deploy-to-webapp
+              uses: azure/webapps-deploy@v3
+              with:
+                  app-name: 'dev-ducky-as'
+                  slot-name: 'Production'
+                  package: .
+            # Deployt den gesamten aktuellen Ordner (.) zur Azure Web App 'dev-ducky-as' im Produktions-Slot

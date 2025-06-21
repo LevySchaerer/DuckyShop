@@ -1,90 +1,123 @@
-import { useState } from "react"
-import sha256 from 'crypto-js/sha256'
-import styles from './Create.module.css'
-import ducky from '../../public/RubberDucky.jpg'
-import ProductAPI from "@/lib/app/Products"
+import { useState } from 'react';
+import sha256 from 'crypto-js/sha256';
+import styles from './Create.module.css';
+import ducky from '../../public/RubberDucky.jpg';
+import ProductAPI from '@/lib/app/Products';
 
-const token = '5eb1bb4d5ebd1578ed23535220158822321975646b3a37d5ee5ed3542887be33'
+const token = '5eb1bb4d5ebd1578ed23535220158822321975646b3a37d5ee5ed3542887be33';
 
 const initialProducts = [
-  {
-    id: 1,
-    name: "Ducky Mr Pop",
-    price: 2.99,
-    image: ducky,
-    stock: 1
-  }
+	{
+		id: 1,
+		name: 'Ducky Mr Pop',
+		price: 2.99,
+		image: ducky,
+		stock: 1,
+	},
 ];
 
 export default function Create() {
-    const [auth, setAuth] = useState(false)
-    const [err, setErr] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [image, setImage] = useState(null)
-    const [valError, setValError] = useState('')
-    const [products, setProducts] = useState(initialProducts)
+	const [auth, setAuth] = useState(false);
+	const [err, setErr] = useState('');
+	const [password, setPassword] = useState('');
+	const [name, setName] = useState('');
+	const [price, setPrice] = useState('');
+	const [image, setImage] = useState(null);
+	const [valError, setValError] = useState('');
+	const [products, setProducts] = useState(initialProducts);
 
-    const authCheck = () => {
-        if (sha256(password).toString() === token) {
-            setAuth(true)
-        } else {
-            setErr("Wrong Password")
-        }
-    }
+	const authCheck = () => {
+		if (sha256(password).toString() === token) {
+			setAuth(true);
+		} else {
+			setErr('Wrong Password');
+		}
+	};
 
-    const handleAddProduct = async () => {
-      if (!name || !price || !image) {
-        setValError("All fields must be filled");
-        return;
-      }
-      setValError("");
+	const handleAddProduct = async () => {
+		if (!name || !price || !image) {
+			setValError('All fields must be filled');
+			return;
+		}
+		setValError('');
 
-      const fileToBase64 = (file) => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
+		const fileToBase64 = (file) =>
+			new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = () => resolve(reader.result);
+				reader.onerror = (error) => reject(error);
+			});
 
-      try {
-        const base64Image = await fileToBase64(image);
+		try {
+			const base64Image = await fileToBase64(image);
 
-        const newProduct = {
-          Name: name,
-          Price: price,
-          Image: base64Image,
-          Stock: 1
-        };
+			const newProduct = {
+				Name: name,
+				Price: price,
+				Image: base64Image,
+				Stock: 1,
+			};
 
-        await ProductAPI.postProduct(newProduct);
-        window.location.href = '/dashboard';
-      } catch (error) {
-        console.error("Fehler beim Hinzufügen des Produkts:", error);
-        setValError("Produkt konnte nicht hinzugefügt werden.");
-      }
-    };
+			await ProductAPI.postProduct(newProduct);
+			window.location.href = '/dashboard';
+		} catch (error) {
+			console.error('Fehler beim Hinzufügen des Produkts:', error);
+			setValError('Produkt konnte nicht hinzugefügt werden.');
+		}
+	};
 
-    if (!auth) {
-      return (
-        <form onSubmit={(e) => { e.preventDefault(); authCheck(); }} className={styles.loginContainer}>
-          <h1>Login</h1>
-          <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Token' type="password"/>
-          <button type="submit" className={styles.button}>Submit</button>
-          <h4>{err}</h4>
-        </form>
-      );
-    }
+	if (!auth) {
+		return (
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					authCheck();
+				}}
+				className={styles.loginContainer}
+			>
+				<h1>Login</h1>
+				<input
+					onChange={(e) => setPassword(e.target.value)}
+					className={styles.input}
+					placeholder="Token"
+					type="password"
+				/>
+				<button type="submit" className={styles.button}>
+					Submit
+				</button>
+				<h4>{err}</h4>
+			</form>
+		);
+	}
 
-    return (
-        <div className={styles.container}>
-          <h1>Create a Ducky</h1>
-            <input onChange={(e) => setName(e.target.value)} value={name} className={styles.input} type="text" placeholder="Name"/>
-            <input onChange={(e) => setPrice(e.target.value)} value={price} className={styles.input} type="number" placeholder="Price" />
-            <input onChange={(e) => setImage(e.target.files[0])} className={styles.imageInput} type="file" accept="image/*"/>
-            <button className={styles.button} onClick={handleAddProduct}>Add Product</button>
-            <h3>{valError}</h3>
-        </div>
-    )
+	return (
+		<div className={styles.container}>
+			<h1>Create a Ducky</h1>
+			<input
+				onChange={(e) => setName(e.target.value)}
+				value={name}
+				className={styles.input}
+				type="text"
+				placeholder="Name"
+			/>
+			<input
+				onChange={(e) => setPrice(e.target.value)}
+				value={price}
+				className={styles.input}
+				type="number"
+				placeholder="Price"
+			/>
+			<input
+				onChange={(e) => setImage(e.target.files[0])}
+				className={styles.imageInput}
+				type="file"
+				accept="image/*"
+			/>
+			<button className={styles.button} onClick={handleAddProduct}>
+				Add Product
+			</button>
+			<h3>{valError}</h3>
+		</div>
+	);
 }

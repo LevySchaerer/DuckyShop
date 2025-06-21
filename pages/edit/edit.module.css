@@ -1,42 +1,42 @@
 .loginContainer {
-    display: flex;
-    row-gap: 20px;
-    flex-direction: column;
-    width: 300px;
+	display: flex;
+	row-gap: 20px;
+	flex-direction: column;
+	width: 300px;
 }
 
 .button {
-    background: #3b82f6;
-    height: 44px;
-    font-size: 14px;
-    color: #ffffff;
-    font-weight: 500;
-    border-radius: 6px;
-    cursor: pointer;
-    border: 2px solid #3b82f6;
-    transition: all 0.3s ease;
+	background: #3b82f6;
+	height: 44px;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 500;
+	border-radius: 6px;
+	cursor: pointer;
+	border: 2px solid #3b82f6;
+	transition: all 0.3s ease;
 }
 
 .button:hover {
-    color: #3b82f6;
-    background: transparent;
-    border: 2px solid #3b82f6;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+	color: #3b82f6;
+	background: transparent;
+	border: 2px solid #3b82f6;
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
 
 .input {
-    outline: none;
-    border: 2px solid #3c3e41;
-    background: transparent;
-    height: 40px;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
+	outline: none;
+	border: 2px solid #3c3e41;
+	background: transparent;
+	height: 40px;
+	font-size: 14px;
+	padding: 10px;
+	border-radius: 4px;
+	transition: border-color 0.3s ease;
 }
 
 .input:focus {
-    border: #2563eb solid 3px;
-    box-shadow: 0px 0px 18px -9px rgba(59,130,246,0.75) inset;
+	border: #2563eb solid 3px;
+	box-shadow: 0px 0px 18px -9px rgba(59, 130, 246, 0.75) inset;
 }

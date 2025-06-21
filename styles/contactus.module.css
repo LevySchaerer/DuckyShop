@@ -1,184 +1,182 @@
-
 .contactUsContainer {
-    min-height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    min-width: 400px;
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+	min-height: 60vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	min-width: 400px;
+	background-color: #1a1a1a;
+	border-radius: 10px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .formContainer {
-    margin: 20px;
-    width: 100%;
-    max-width: 800px;
-    color: white; 
-    min-width: 400px; 
+	margin: 20px;
+	width: 100%;
+	max-width: 800px;
+	color: white;
+	min-width: 400px;
 }
 
 .formContainer h1 {
-    margin-bottom: 20px;
-    color: #ffffff; 
-    font-size: 2.5rem;
-    font-weight: bold;
+	margin-bottom: 20px;
+	color: #ffffff;
+	font-size: 2.5rem;
+	font-weight: bold;
 }
 
 .inputField {
-    position: relative;
-    width: 100%;
-    margin-bottom: 2rem;
-    color: white; 
+	position: relative;
+	width: 100%;
+	margin-bottom: 2rem;
+	color: white;
 }
 
 .inputField input,
 .inputField textarea {
-    width: 100%;
-    outline: 0;
-    padding: 8px;
-    border: 1px solid #ffffff; 
-    box-shadow: none;
-    color: white; 
-    background: transparent;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    resize: vertical;
+	width: 100%;
+	outline: 0;
+	padding: 8px;
+	border: 1px solid #ffffff;
+	box-shadow: none;
+	color: white;
+	background: transparent;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	resize: vertical;
 }
 
 .inputField label {
-    position: absolute;
-    top: 8px;
-    left: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #1E1E1E;
-    color: #ffffff;
-    transition: 0.3s all;
-    cursor: text;
-    font-size: 16px;
+	position: absolute;
+	top: 8px;
+	left: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: #1e1e1e;
+	color: #ffffff;
+	transition: 0.3s all;
+	cursor: text;
+	font-size: 16px;
 }
 
 .inputField input:focus,
 .inputField textarea:focus {
-    border-color: #85B8FF;
+	border-color: #85b8ff;
 }
 
 .inputField input:focus ~ label,
 .inputField input:not(:placeholder-shown) ~ label,
 .inputField textarea:focus ~ label,
 .inputField textarea:not(:placeholder-shown) ~ label {
-    font-size: 14px;
-    top: -8px;
-    color: #85B8FF;
+	font-size: 14px;
+	top: -8px;
+	color: #85b8ff;
 }
 
 .inputFieldError {
-    position: relative;
-    width: 100%;
-    margin-bottom: 2rem;
-    color: white;
+	position: relative;
+	width: 100%;
+	margin-bottom: 2rem;
+	color: white;
 }
 
 .inputFieldError input,
 .inputFieldError textarea {
-    width: 100%;
-    outline: 0;
-    padding: 0.5rem 8px;
-    border: 1px solid #d33300;
-    box-shadow: none;
-    color: white;
-    background: transparent;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    resize: vertical;
+	width: 100%;
+	outline: 0;
+	padding: 0.5rem 8px;
+	border: 1px solid #d33300;
+	box-shadow: none;
+	color: white;
+	background: transparent;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	resize: vertical;
 }
 
 .inputFieldError label {
-    position: absolute;
-    top: -8px;
-    left: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #1E1E1E;
-    color: #d33300;
-    transition: 0.3s all;
-    cursor: text;
-    font-size: 14px;
+	position: absolute;
+	top: -8px;
+	left: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: #1e1e1e;
+	color: #d33300;
+	transition: 0.3s all;
+	cursor: text;
+	font-size: 14px;
 }
 
 .inputFieldError input:focus,
 .inputFieldError textarea:focus {
-    border-color: #d33300;
+	border-color: #d33300;
 }
 
 .inputFieldError input:focus ~ label,
 .inputFieldError input:not(:placeholder-shown) ~ label,
 .inputFieldError textarea:focus ~ label,
 .inputFieldError textarea:not(:placeholder-shown) ~ label {
-    font-size: 14px;
-    top: -8px;
-    color: #d33300;
+	font-size: 14px;
+	top: -8px;
+	color: #d33300;
 }
 
 .button {
-    background-color: #85B8FF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+	background-color: #85b8ff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
 }
 
 .button:hover {
-    background-color: #85B8FF;
+	background-color: #85b8ff;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: flex-start; 
+	display: flex;
+	justify-content: flex-start;
 }
 
 .error {
-    margin-top: -20px;
-    margin-bottom: 30px;
-    color: #d33300;
-    font-size: 0.7rem;
+	margin-top: -20px;
+	margin-bottom: 30px;
+	color: #d33300;
+	font-size: 0.7rem;
 }
 
 @media (prefers-color-scheme: light) {
-    .formContainer h1 {
-        color: black;
-    }
+	.formContainer h1 {
+		color: black;
+	}
 
-    .inputField label,
-    .inputFieldError label {
-        background-color: white;
-        color: #dcdcdc;
-    }
-    .inputField input,
-    .inputField textarea,
-    .inputFieldError input,
-    .inputFieldError textarea {
-        border: 1px solid #d3d3d3;
-        box-shadow: none;
-        color: black;
-    }
-    .contactUsContainer {
-        color: black;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-
-    }
+	.inputField label,
+	.inputFieldError label {
+		background-color: white;
+		color: #dcdcdc;
+	}
+	.inputField input,
+	.inputField textarea,
+	.inputFieldError input,
+	.inputFieldError textarea {
+		border: 1px solid #d3d3d3;
+		box-shadow: none;
+		color: black;
+	}
+	.contactUsContainer {
+		color: black;
+		background-color: #fff;
+		border-radius: 10px;
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+	}
 }
 
 @media only screen and (max-width: 750px) {
-    .formContainer {
-        margin: 10px;
-        max-width: 100%;
-        min-width: 300px; 
-    }
+	.formContainer {
+		margin: 10px;
+		max-width: 100%;
+		min-width: 300px;
+	}
 }
