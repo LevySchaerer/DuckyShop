@@ -35,7 +35,6 @@ export default function Dashboard() {
     const loadOrder = async () => {
       const ordersArray = await OrdersAPI.getOrders();
       setOrders(ordersArray);
-      console.log(ordersArray)
     };
 
     loadOrder();

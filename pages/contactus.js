@@ -50,7 +50,6 @@ const ContactUs = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            console.log('Form submitted:', formData);
             toast.success("Message sent successfully!", { transition: Bounce });
             setFormData({ name: '', email: '', message: '' });
         }
